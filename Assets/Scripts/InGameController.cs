@@ -129,9 +129,6 @@ public class InGameController : MonoBehaviour
         {
             highScore = currentTime;
         }
-
-        // 게임 종료 UI 열기
-        GameManager.Instance.GameOverState();
     }
 
     
