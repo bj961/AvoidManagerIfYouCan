@@ -36,6 +36,7 @@ public class UIManager : MonoBehaviour
 
     }
 
+    //팝업창 열기 & 닫기
     public void OpenPopup(GameObject gameObject) //팝업창 열기
     {
         gameObject.SetActive(true);
@@ -45,6 +46,7 @@ public class UIManager : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    //특정 창 열기 & 닫기
     public void SetIntroUI(bool isActive) //인트로창
     {
         IntroUI.gameObject.SetActive(isActive);
@@ -64,4 +66,33 @@ public class UIManager : MonoBehaviour
     {
         GameOver.gameObject.SetActive(isActive);
     }
+
+    //버튼 클릭 이벤트
+    public void OnClickDecideButton() //캐릭터선택 결정 버튼
+    {
+        //캐릭터별로 선택 버튼이 따로 있는지, 아니면 캐릭터를 선택하고 결정 버튼 하나만 클릭할지는 아직 미정
+    }
+
+    public void OnClickStartButton() //게임시작 버튼
+    {
+        //인트로창을 닫고 플레이창을 열기
+        SetIntroUI(false);
+        SetPlayUI(false);
+
+        //게임시작 로직
+
+    }
+
+    public void OnClickRestartButton() //다시하기 버튼
+    {
+        //게임시작 로직
+    }
+
+    public void OnClickGotoTitleButton() //메인화면(타이틀 돌아가기) 버튼
+    {
+        SetIntroUI(true);
+        SetPlayUI(false);
+        SoundManager.Instance.ChangeBGM(SoundManager.Instance.introBGM);
+    }
+
 }
