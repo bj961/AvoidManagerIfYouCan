@@ -288,6 +288,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f9ed37be7ce5a4a859661ee92191cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inGameController: {fileID: 0}
+  player1Prefab: {fileID: 0}
+  player2Prefab: {fileID: 0}
+  CharacterSelectUI: {fileID: 0}
 --- !u!4 &1249962181
 Transform:
   m_ObjectHideFlags: 0

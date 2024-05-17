@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/****** 스테이지(난이도) 관리 매니저  ******/
 public class StageManager : MonoBehaviour
 {
-    // 난이도 관리
     public static StageManager Instance;
 
     private int difficulty;
     public int GetDifficulty() { return difficulty; }
+
+    private float enemyCreateDelay;
+    public float GetEnemyCreateDelay() {  return enemyCreateDelay; }
 
 
     private void Awake()
@@ -45,5 +48,7 @@ public class StageManager : MonoBehaviour
         // 난이도 세팅
         // 임시) 게임 빨라지도록 하여 난이도 상승
         Time.timeScale = 1f + 0.3f * difficulty;
+
+        //enemyCreateDelay -= 0.1f;
     }
 }
