@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject IntroUI; //인트로창
     [SerializeField] GameObject PlayUI; //게임 플레이창
     [SerializeField] GameObject SelectCharUI; //캐릭터 선택창
-    [SerializeField] GameObject GameOver; //게임오버창
+    [SerializeField] GameObject GameOverUI; //게임오버창
 
     public static UIManager Instance { get; private set; }
 
@@ -62,9 +62,9 @@ public class UIManager : MonoBehaviour
         SelectCharUI.gameObject.SetActive(isActive);
     }
 
-    public void SetGameOveroUI(bool isActive) //게임오버창
+    public void SetGameOverUI(bool isActive) //게임오버창
     {
-        GameOver.gameObject.SetActive(isActive);
+        GameOverUI.gameObject.SetActive(isActive);
     }
 
     //버튼 클릭 이벤트
