@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemySpawn : MonoBehaviour
 {
     public GameObject EnemyUrock;
+    public GameObject EnemyHyuk;
 
     int EnemyCount;
     float Speed = 0.02f;
@@ -22,7 +23,6 @@ public class EnemySpawn : MonoBehaviour
         {
             Speed = 0.05f;
         }
-
     }
 
     // Update is called once per frame
