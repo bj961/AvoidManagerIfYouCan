@@ -123,8 +123,10 @@ public class InGameController : MonoBehaviour
     // Player가 적 오브젝트와 충돌할 경우(=게임 오버) 이 함수 호출토록함
     public void GameOver()
     {
+        // 시간 정지
         Time.timeScale = 0f;
 
+        // 최고 점수 계산
         if (currentTime > highScore)
         {
             highScore = currentTime;
