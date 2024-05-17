@@ -6,13 +6,10 @@ using UnityEngine;
 public class StageManager : MonoBehaviour
 {
     public static StageManager Instance;
-
     private int difficulty;
-    public int GetDifficulty() { return difficulty; }
-
-    private float enemyCreateDelay;
-    public float GetEnemyCreateDelay() {  return enemyCreateDelay; }
-
+    [SerializeField] private GameObject Enemy;
+    
+    int level = 0;
 
     private void Awake()
     {
@@ -31,6 +28,7 @@ public class StageManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        InvokeRepeating("MakeEnemy", 0f, 1f);
         difficulty = 0;
     }
 
@@ -38,6 +36,22 @@ public class StageManager : MonoBehaviour
     void Update()
     {
 
+    }
+
+    void MakeEnemy()
+    {
+        Instantiate(Enemy);
+
+        if (level == 0)
+        {
+            int p = Random.Range(0, 10);
+            if (p < 2) Instantiate(Enemy);
+        }
+        else if(level == 1)
+        {
+            int p = Random.Range(0, 10);
+            if (p < 2) Instantiate(Enemy);
+        }
     }
 
     public void SetDifficulty(int newDifficulty)
