@@ -86,16 +86,16 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        currentTime += Time.deltaTime;
-        currentScoreText.text = currentTime.ToString("N3"); // UI
+        currentTime += Time.deltaTime; // 게임 매니저에서 수행
+        currentScoreText.text = currentTime.ToString("N3"); // UI 매니저쪽에서 처리
     }
 
     // 게임 시작 or 다시 하기 버튼 누르면 호출
     // 아니면 GameStartButton.cs 만들어서 분리하기
     public void GameStart()
     {
-        // MainScene으로 이동
-        SceneManager.LoadScene(1);
+        // MainScene 다시 로드
+        SceneManager.LoadScene(0);
     }
 
     // 똥(= 적 캐릭터 = 매니저) 생성
