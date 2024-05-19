@@ -4,18 +4,18 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-// ÀÌ ½ºÅ©¸³Æ®´Â °ü¸®ÀÚ ÀÔ´Ï´Ù.
-// ÇÃ·¹ÀÌ¾îÀÇ ÀÎÇ²À» °ü¸®ÇØÁÙ °ÍÀÔ´Ï´Ù!
+// ì´ ìŠ¤í¬ë¦½íŠ¸ëŠ” ê´€ë¦¬ì ì…ë‹ˆë‹¤.
+// í”Œë ˆì´ì–´ì˜ ì¸í’‹ì„ ê´€ë¦¬í•´ì¤„ ê²ƒì…ë‹ˆë‹¤!
 public class PlayerInputController : CharacterMoveController
 {
-    [SerializeField] private SpriteRenderer characterSpriteRenderer; // Ä³¸¯ÅÍ ½ºÇÁ¶óÀÌÆ® Á¶ÀÛ
+    [SerializeField] private SpriteRenderer characterSpriteRenderer; // ìºë¦­í„° ìŠ¤í”„ë¼ì´íŠ¸ ì¡°ì‘
 
-    private Vector2 inputValue; // OnMove¿Í ÇÔ²² LateUpdate¿¡¼­µµ »ç¿ëÇÏ±â À§ÇØ CallMoveEvent·Î µé¾î°¡°Ô µÇ´Â ¹éÅÍ °ªÀ» Àü¿ªº¯¼ö·Î ¼³Á¤
+    private Vector2 inputValue; // OnMoveì™€ í•¨ê»˜ LateUpdateì—ì„œë„ ì‚¬ìš©í•˜ê¸° ìœ„í•´ CallMoveEventë¡œ ë“¤ì–´ê°€ê²Œ ë˜ëŠ” ë°±í„° ê°’ì„ ì „ì—­ë³€ìˆ˜ë¡œ ì„¤ì •
 
-    public void OnMove(InputValue value) // InputValue value´Â À¯Àú°¡ ÀÔ·ÂÇÑ °ªÀ» ÀúÀå
+    public void OnMove(InputValue value) // InputValue valueëŠ” ìœ ì €ê°€ ì…ë ¥í•œ ê°’ì„ ì €ì¥
     {
-        inputValue = value.Get<Vector2>().normalized; // .normalized ¹«Á¶°Ç ±æÀÌ°¡ ¹üÀ§ ¾ÈÀ¸·Î
-        CallMoveEvent(inputValue); // CharacterMoveController¸¦ ÂüÁ¶ÇØ »ç¿ë
+        inputValue = value.Get<Vector2>().normalized; // .normalized ë¬´ì¡°ê±´ ê¸¸ì´ê°€ ë²”ìœ„ ì•ˆìœ¼ë¡œ
+        CallMoveEvent(inputValue); // CharacterMoveControllerë¥¼ ì°¸ì¡°í•´ ì‚¬ìš©
     }
 
     private void LateUpdate()
