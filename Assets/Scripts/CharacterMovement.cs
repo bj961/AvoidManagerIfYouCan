@@ -47,5 +47,11 @@ public class CharacterMovement : MonoBehaviour
         direction.x = direction.x * characterStatHandler.currentStats.speed; // 캐릭터의 설정된 스피드를 받아오도록 수정
 
         moveRigidbody.velocity = new Vector2(direction.x, moveRigidbody.velocity.y); // velocity = 속도, 위에서 5.0f로 설정
+        
+        // 유저가 아래 버튼을 눌렀을 경우
+        if(direction.y < 0)
+        {
+            moveRigidbody.velocity = new Vector2(direction.x * 2.5f, moveRigidbody.velocity.y);
+        }
     }
 }

@@ -41,7 +41,7 @@
                 {
                     "name": "down",
                     "id": "5705bc71-2653-47f3-89f2-8850e2fa40f9",
-                    "path": "",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -96,7 +96,7 @@
                 {
                     "name": "down",
                     "id": "f502d52b-4b77-4142-961b-82e8ee6c53fe",
-                    "path": "",
+                    "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
