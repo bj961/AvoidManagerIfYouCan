@@ -180,7 +180,7 @@ MonoBehaviour:
   baseStats:
     statsChangeType: 2
     maxHealth: 3
-    speed: 5
+    speed: 2
   statModifiers: []
 --- !u!1 &7347997436643082830
 GameObject:
