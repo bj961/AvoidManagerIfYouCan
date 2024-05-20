@@ -7,10 +7,10 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public GameObject IntroUI; //인트로창
-    public GameObject PlayUI; //게임 플레이창
-    public GameObject SelectCharUI; //캐릭터 선택창
-    public GameObject GameOverUI; //게임오버창
+    public GameObject IntroUI;
+    public GameObject PlayUI;
+    public GameObject SelectCharUI;
+    public GameObject GameOverUI;
 
     public static UIManager Instance { get; private set; }
 
