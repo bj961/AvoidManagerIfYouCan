@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] GameObject IntroUI; //인트로창
-    [SerializeField] GameObject PlayUI; //게임 플레이창
-    [SerializeField] GameObject SelectCharUI; //캐릭터 선택창
-    [SerializeField] GameObject GameOverUI; //게임오버창
+    [SerializeField] GameObject IntroUI; //?�트로창
+    [SerializeField] GameObject PlayUI; //게임 ?�레?�창
+    [SerializeField] GameObject SelectCharUI; //캐릭???�택�?
+    [SerializeField] GameObject GameOverUI; //게임?�버�?
 
     public static UIManager Instance { get; private set; }
 
@@ -36,59 +36,59 @@ public class UIManager : MonoBehaviour
 
     }
 
-    //팝업창 열기 & 닫기
-    public void OpenPopup(GameObject gameObject) //팝업창 열기
+    //?�업�??�기 & ?�기
+    public void OpenPopup(GameObject gameObject) //?�업�??�기
     {
         gameObject.SetActive(true);
     }
-    public void ClosePopup(GameObject gameObject) //팝업창 닫기
+    public void ClosePopup(GameObject gameObject) //?�업�??�기
     {
         gameObject.SetActive(false);
     }
 
-    //특정 창 열기 & 닫기
-    public void SetIntroUI(bool isActive) //인트로창
+    //?�정 �??�기 & ?�기
+    public void SetIntroUI(bool isActive) //?�트로창
     {
         IntroUI.gameObject.SetActive(isActive);
     }
 
-    public void SetPlayUI(bool isActive) //플레이창
+    public void SetPlayUI(bool isActive) //?�레?�창
     {
         PlayUI.gameObject.SetActive(isActive);
     }
 
-    public void SetSelectCharUI(bool isActive) //캐릭터선택창
+    public void SetSelectCharUI(bool isActive) //캐릭?�선?�창
     {
         SelectCharUI.gameObject.SetActive(isActive);
     }
 
-    public void SetGameOverUI(bool isActive) //게임오버창
+    public void SetGameOverUI(bool isActive) //게임?�버�?
     {
         GameOverUI.gameObject.SetActive(isActive);
     }
 
-    //버튼 클릭 이벤트
-    public void OnClickDecideButton() //캐릭터선택 결정 버튼
+    //버튼 ?�릭 ?�벤??
+    public void OnClickDecideButton() //캐릭?�선??결정 버튼
     {
-        //캐릭터별로 선택 버튼이 따로 있는지, 아니면 캐릭터를 선택하고 결정 버튼 하나만 클릭할지는 아직 미정
+        //캐릭?�별�??�택 버튼???�로 ?�는지, ?�니�?캐릭?��? ?�택?�고 결정 버튼 ?�나�??�릭?��????�직 미정
     }
 
-    public void OnClickStartButton() //게임시작 버튼
+    public void OnClickStartButton() //게임?�작 버튼
     {
-        //인트로창을 닫고 플레이창을 열기
+        //?�트로창???�고 ?�레?�창???�기
         SetIntroUI(false);
         SetPlayUI(false);
 
-        //게임시작 로직
+        //게임?�작 로직
 
     }
 
-    public void OnClickRestartButton() //다시하기 버튼
+    public void OnClickRestartButton() //?�시?�기 버튼
     {
-        //게임시작 로직
+        //게임?�작 로직
     }
 
-    public void OnClickGotoTitleButton() //메인화면(타이틀 돌아가기) 버튼
+    public void OnClickGotoTitleButton() //메인?�면(?�?��? ?�아가�? 버튼
     {
         SetIntroUI(true);
         SetPlayUI(false);

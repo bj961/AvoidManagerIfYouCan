@@ -9,47 +9,32 @@ public class StageManager : MonoBehaviour
     public static StageManager Instance;
     private int difficulty;
     [SerializeField] private GameObject[] EnemySpawn;
-    int level = 0;
+    float SpawnTime = 0;
+    float EnemySpawnTime = 1f;
 
-    private void Awake()
+
+    private void Update()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
-
-    void Start()
-    {
-        InvokeRepeating("MakeEnemy", 0f, 1f);
-        difficulty = 0;
+        MakeEnemy();
     }
 
     // Update is called once per frame
 
     void MakeEnemy()
     {
-        Instantiate(EnemySpawn[0]);
+        int p = Random.Range(0, 10);
 
-        if (level == 0)
+        if (SpawnTime < EnemySpawnTime)
         {
-            int p = Random.Range(0, 10);
-            if (p < 2) Instantiate(EnemySpawn[0]);
+            SpawnTime += Time.deltaTime;
+            Debug.Log(SpawnTime);
         }
-
-        // Score or time < int = Add.Meney
-
-        //else if(level == 1)
-        //{
-        //    int p = Random.Range(0, 10);
-        //    if (p < 2) Instantiate(EnemySpawn[1]);
-        //}
+        else if (SpawnTime >= EnemySpawnTime)
+        {
+            Instantiate(EnemySpawn[0]);
+            if (p < 1) Instantiate(EnemySpawn[1]);
+            SpawnTime = 0;
+        }
     }
 
     public void SetDifficulty(int newDifficulty)
@@ -57,13 +42,9 @@ public class StageManager : MonoBehaviour
         difficulty = newDifficulty;
 
 
-        // 난이도 세팅
+        //난이도 세팅
         // 임시) 게임 빨라지도록 하여 난이도 상승
-        //Time.timeScale = 1f + 0.3f * difficulty;
+        Time.timeScale = 1f + 0.3f * difficulty;
 
-        //enemyCreateDelay -= 0.1f;
     }
-
-
-    // 적 생성
 }
