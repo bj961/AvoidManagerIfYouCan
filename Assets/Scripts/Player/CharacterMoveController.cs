@@ -3,14 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Ä³¸¯ÅÍÀÇ ÀÌº¥Æ® ¸Ş¼Òµå¸¦ °ü¸®ÇÏ±â À§ÇÑ ½ºÅ©¸³Æ®
-// °øÅëÀû ±â´ÉÀ» Æ÷ÇÔÇÏ¿© ÀçÈ°¿ëÇÒ ¼ö ÀÖµµ·Ï ÇØÁİ´Ï´Ù.
+// ìºë¦­í„°ì˜ ì´ë²¤íŠ¸ ë©”ì†Œë“œë¥¼ ê´€ë¦¬í•˜ê¸° ìœ„í•œ ìŠ¤í¬ë¦½íŠ¸
+// ê³µí†µì  ê¸°ëŠ¥ì„ í¬í•¨í•˜ì—¬ ì¬í™œìš©í•  ìˆ˜ ìˆë„ë¡ í•´ì¤ë‹ˆë‹¤.
 public class CharacterMoveController : MonoBehaviour
 {
-    public event Action<Vector2> OnMoveEvent; // ActionÀº ¹«Á¶°Ç void¸¸ ¹İÈ¯ÇØ¾ß ¾Æ´Ï¸é Func
+    public event Action<Vector2> OnMoveEvent; // Actionì€ ë¬´ì¡°ê±´ voidë§Œ ë°˜í™˜í•´ì•¼ ì•„ë‹ˆë©´ Func
 
     public void CallMoveEvent(Vector2 direction)
     {
-        OnMoveEvent?.Invoke(direction); // ?. ¾øÀ¸¸é ¸»°í ÀÖÀ¸¸é ½ÇÇà
+        OnMoveEvent?.Invoke(direction); // ?. ì—†ìœ¼ë©´ ë§ê³  ìˆìœ¼ë©´ ì‹¤í–‰
     }
 }

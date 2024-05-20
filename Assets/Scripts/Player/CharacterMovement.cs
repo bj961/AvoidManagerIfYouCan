@@ -3,26 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// ÀÌ ½ºÅ©¸³Æ®´Â ½Ç¹«ÀÚ ÀÔ´Ï´Ù.
-// ½ÇÁ¦·Î ÀÌµ¿ÀÌ ÀÏ¾î³¯ ¼ö ÀÖµµ·Ï ÇØÁÙ°ÍÀÔ´Ï´Ù!
+// ì´ ìŠ¤í¬ë¦½íŠ¸ëŠ” ì‹¤ë¬´ì ì…ë‹ˆë‹¤.
+// ì‹¤ì œë¡œ ì´ë™ì´ ì¼ì–´ë‚  ìˆ˜ ìˆë„ë¡ í•´ì¤„ê²ƒì…ë‹ˆë‹¤!
 public class CharacterMovement : MonoBehaviour
 {
     private CharacterMoveController moveController;
     private Rigidbody2D moveRigidbody;
 
-    // ¹°¸®¿¡ ÀÇÇØ º¯ÇÏ´Â ¹«ºê°ªÀ» ³Ö¾îÁÖ±â À§ÇÑ º¯¼ö
-    private Vector2 moveDirection = Vector2.zero;// ÃÊ±â°ª
+    private CharacterStatHandler characterStatHandler;
+
+    private CharacterStaminaSystem characterStaminaSystem;
+
+    // ë¬¼ë¦¬ì— ì˜í•´ ë³€í•˜ëŠ” ë¬´ë¸Œê°’ì„ ë„£ì–´ì£¼ê¸° ìœ„í•œ ë³€ìˆ˜
+    private Vector2 moveDirection = Vector2.zero;// ì´ˆê¸°ê°’
 
     private void Awake()
     {
-        // °°Àº °ÔÀÓ¿ÀºêÁ§Æ® ¾È¿¡ µé¾îÀÖ´Â ÄÄÆ÷³ÍÆ®¸¦ °¡Á®¿À´Â °ÍÀÌ±â ¶§¹®¿¡ Awake¿¡ »ç¿ëÇÏ¿´½À´Ï´Ù.
+        // ê°™ì€ ê²Œì„ì˜¤ë¸Œì íŠ¸ ì•ˆì— ë“¤ì–´ìˆëŠ” ì»´í¬ë„ŒíŠ¸ë¥¼ ê°€ì ¸ì˜¤ëŠ” ê²ƒì´ê¸° ë•Œë¬¸ì— Awakeì— ì‚¬ìš©í•˜ì˜€ìŠµë‹ˆë‹¤.
         moveController = GetComponent<CharacterMoveController>();
         moveRigidbody = GetComponent<Rigidbody2D>();
+
+        characterStatHandler = GetComponent<CharacterStatHandler>();
+        characterStaminaSystem = GetComponent<CharacterStaminaSystem>();
     }
 
     private void Start()
     {
-        // ÄÁÆ®·Ñ·¯¿¡ ¹«ºê°ªÀÌ ÀÖ´Ù´Â °É ¾Ë·ÁÁÖ±â
+        // ì»¨íŠ¸ë¡¤ëŸ¬ì— ë¬´ë¸Œê°’ì´ ìˆë‹¤ëŠ” ê±¸ ì•Œë ¤ì£¼ê¸°
         moveController.OnMoveEvent += Move;
     }
 
@@ -31,17 +38,42 @@ public class CharacterMovement : MonoBehaviour
         ApplyMovement(moveDirection);
     }
 
-    // ÀÌµ¿¿¡ ´ëÇÑ Vector2 °ªÀÌ µé¾î¿À¸é °ªÀ» ÀúÀå
+    private void Update()
+    {
+        characterStaminaSystem.RecoveryStamina();
+    }
+
+    // ì´ë™ì— ëŒ€í•œ Vector2 ê°’ì´ ë“¤ì–´ì˜¤ë©´ ê°’ì„ ì €ì¥
     private void Move(Vector2 direction)
     {
         moveDirection = direction;
     }
 
-    // ÀÌµ¿ °ª ³Ö¾îÁÖ±â, ¸®Áöµå ¹Ùµğ¿¡ ÀÌµ¿ Àû¿ëÇÏ±â
+    // ì´ë™ ê°’ ë„£ì–´ì£¼ê¸°, ë¦¬ì§€ë“œ ë°”ë””ì— ì´ë™ ì ìš©í•˜ê¸°
     private void ApplyMovement(Vector2 direction)
     {
-        direction.x = direction.x * 5.0f; // ¾ÆÁ÷ Ä³¸¯ÅÍÀÇ ½ºÅÈÀÌ ±¸ÇöµÇ¾î ÀÖÁö ¾ÊÀ¸¹Ç·Î ÃÊ±â°ª 5.0f ÁöÁ¤
+        direction.x = direction.x * characterStatHandler.currentStats.speed; // ìºë¦­í„°ì˜ ì„¤ì •ëœ ìŠ¤í”¼ë“œë¥¼ ë°›ì•„ì˜¤ë„ë¡ ìˆ˜ì •
+        moveRigidbody.velocity = new Vector2(direction.x, moveRigidbody.velocity.y); // velocity = ì†ë„, ìœ„ì—ì„œ 5.0fë¡œ ì„¤ì •
 
-        moveRigidbody.velocity = new Vector2(direction.x, moveRigidbody.velocity.y); // velocity = ¼Óµµ, À§¿¡¼­ 5.0f·Î ¼³Á¤
+        float nolmalSpeed = direction.x;
+        float sprintSpeed = direction.x * 2.5f;
+        
+        // ìœ ì €ê°€ ì•„ë˜ ë²„íŠ¼ì„ ëˆŒë €ê³  xê°’ì— ë³€í™”ê°€ ìˆì„ ë•Œ
+        if(direction.y < 0 && direction.x != 0)
+        {
+            if (characterStaminaSystem.ChangeStamina() && characterStaminaSystem.currentStamina > 0.0f)
+            {
+                moveRigidbody.velocity = new Vector2(sprintSpeed, moveRigidbody.velocity.y);
+                Debug.Log("ìŠ¤í”„ë¦°íŠ¸ ìƒíƒœ");
+            }
+            
+            if(characterStaminaSystem.currentStamina < 0.1f)
+            {
+                //characterStaminaSystem.RecoveryStamina();
+                moveRigidbody.velocity = new Vector2(nolmalSpeed, moveRigidbody.velocity.y);
+                Debug.Log("ìŠ¤í”„ë¦°íŠ¸ ì¢…ë£Œ");
+            }
+                
+        }
     }
 }
