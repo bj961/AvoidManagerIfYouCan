@@ -6,12 +6,23 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] GameObject IntroUI; //인트로창
-    [SerializeField] GameObject PlayUI; //게임 플레이창
-    [SerializeField] GameObject SelectCharUI; //캐릭터 선택창
-    [SerializeField] GameObject GameOverUI; //게임오버창
+    public GameObject IntroUI; //인트로창
+    public GameObject PlayUI; //게임 플레이창
+    public GameObject SelectCharUI; //캐릭터 선택창
+    public GameObject GameOverUI; //게임오버창
 
     public static UIManager Instance { get; private set; }
+
+    public enum UIPopUp
+    {
+        Main = 0,
+        SelectCharacter,
+        Play,
+        GameOver
+    }
+
+    private GameObject[] UIList = new GameObject
+
 
     private void Awake()
     {
@@ -24,6 +35,10 @@ public class UIManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+
+        UIList
+
+
     }
 
     void Start()
@@ -36,59 +51,55 @@ public class UIManager : MonoBehaviour
 
     }
 
-    //팝업창 열기 & 닫기
-    public void OpenPopup(GameObject gameObject) //팝업창 열기
-    {
+    public void OpenPopup(int num)
+    {   
+
+
+
         gameObject.SetActive(true);
     }
-    public void ClosePopup(GameObject gameObject) //팝업창 닫기
+    public void ClosePopup(GameObject gameObject)
     {
         gameObject.SetActive(false);
     }
 
-    //특정 창 열기 & 닫기
-    public void SetIntroUI(bool isActive) //인트로창
+    public void SetIntroUI(bool isActive)
     {
         IntroUI.gameObject.SetActive(isActive);
     }
 
-    public void SetPlayUI(bool isActive) //플레이창
+    public void SetPlayUI(bool isActive)
     {
         PlayUI.gameObject.SetActive(isActive);
     }
 
-    public void SetSelectCharUI(bool isActive) //캐릭터선택창
+    public void SetSelectCharUI(bool isActive)
     {
         SelectCharUI.gameObject.SetActive(isActive);
     }
 
-    public void SetGameOverUI(bool isActive) //게임오버창
+    public void SetGameOverUI(bool isActive)
     {
         GameOverUI.gameObject.SetActive(isActive);
     }
 
-    //버튼 클릭 이벤트
-    public void OnClickDecideButton() //캐릭터선택 결정 버튼
+    public void OnClickDecideButton()
     {
-        //캐릭터별로 선택 버튼이 따로 있는지, 아니면 캐릭터를 선택하고 결정 버튼 하나만 클릭할지는 아직 미정
+
     }
 
-    public void OnClickStartButton() //게임시작 버튼
+    public void OnClickStartButton()
     {
-        //인트로창을 닫고 플레이창을 열기
         SetIntroUI(false);
         SetPlayUI(false);
 
-        //게임시작 로직
-
     }
 
-    public void OnClickRestartButton() //다시하기 버튼
+    public void OnClickRestartButton()
     {
-        //게임시작 로직
     }
 
-    public void OnClickGotoTitleButton() //메인화면(타이틀 돌아가기) 버튼
+    public void OnClickGotoTitleButton()
     {
         SetIntroUI(true);
         SetPlayUI(false);
