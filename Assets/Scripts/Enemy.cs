@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnemySpawn : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
-    public GameObject EnemyHyuk;
 
     int EnemyCount;
     float Speed = 0.02f;
@@ -17,6 +16,7 @@ public class EnemySpawn : MonoBehaviour
         float y = 3.0f;
         //Spawn point
         transform.position = new Vector2(x, y);
+        
 
         if (EnemyCount == 1)
         {
@@ -29,15 +29,16 @@ public class EnemySpawn : MonoBehaviour
     {
         // -Y Speed Control
         transform.position += Vector3.down * Speed;
-
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        // i want destroy this gameObject but Can't
         if (transform.position.y < -7.0f)
         {
             Destroy(gameObject);
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // destroy this gameObject but Can't
+
+
     }
 }

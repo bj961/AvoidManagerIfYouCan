@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 /****** 스테이지(난이도) 관리 매니저  ******/
@@ -7,8 +8,7 @@ public class StageManager : MonoBehaviour
 {
     public static StageManager Instance;
     private int difficulty;
-    [SerializeField] private GameObject Enemy;
-    
+    [SerializeField] private GameObject[] EnemySpawn;
     int level = 0;
 
     private void Awake()
@@ -40,18 +40,21 @@ public class StageManager : MonoBehaviour
 
     void MakeEnemy()
     {
-        Instantiate(Enemy);
+        Instantiate(EnemySpawn[0]);
 
         if (level == 0)
         {
             int p = Random.Range(0, 10);
-            if (p < 2) Instantiate(Enemy);
+            if (p < 2) Instantiate(EnemySpawn[0]);
         }
-        else if(level == 1)
-        {
-            int p = Random.Range(0, 10);
-            if (p < 2) Instantiate(Enemy);
-        }
+
+        // Score or time < int = Add.Meney
+
+        //else if(level == 1)
+        //{
+        //    int p = Random.Range(0, 10);
+        //    if (p < 2) Instantiate(EnemySpawn[1]);
+        //}
     }
 
     public void SetDifficulty(int newDifficulty)
@@ -61,7 +64,7 @@ public class StageManager : MonoBehaviour
 
         // 난이도 세팅
         // 임시) 게임 빨라지도록 하여 난이도 상승
-        Time.timeScale = 1f + 0.3f * difficulty;
+        //Time.timeScale = 1f + 0.3f * difficulty;
 
         //enemyCreateDelay -= 0.1f;
     }
