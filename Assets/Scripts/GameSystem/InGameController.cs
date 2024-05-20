@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -13,15 +14,19 @@ public class InGameController : MonoBehaviour
 
     private GameObject player1;
     private GameObject player2;
-    private int alivePlayer;
 
-    // 적 프리팹
-    public List<GameObject> enemyPrefabList; // 적 종류 여러 개
-    public GameObject enemy; // 테스트용.. 추후 위 리스트 사용한 코드로 수정
+    // TODO : 
+    private int alivePlayers;
+    private bool isPlayer1Alive;
+    private bool isPlayer2Alive;
+    
 
     // 갱신할 UI들
     public Text currentScoreText;
     public Text highScoreText;
+
+    // TODO : 캐릭터 선택 기능 구현한다면 해당 UI 연결하여 사용할것
+    // public GameObject CharacterSelectUI;
 
 
     // 경과 시간 = 점수
@@ -31,27 +36,7 @@ public class InGameController : MonoBehaviour
     public float GetHighScore() { return highScore; }
 
 
-    // 난이도 관련
-    private float enemyCreateDelay; // 임시.. 나중에 StageManager로 옮길 예정
-    //private float difficultyIncreaseInterval = 60f;
-
-
-
-    private void Awake()
-    {
-        if(Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(Instance);
-        }
-        else
-        {
-            Destroy(this);
-            
-        }
-    }
-
-    
+   
 
 
     // 게임 초기화
@@ -59,7 +44,9 @@ public class InGameController : MonoBehaviour
     {
         //게임 초기화
         currentTime = 0;
-        enemyCreateDelay = 1f;
+
+        // UI 연결
+
         currentScoreText.text = currentTime.ToString("N3");
         highScoreText.text = highScore.ToString("N3");
 
@@ -81,16 +68,14 @@ public class InGameController : MonoBehaviour
 
 
     /** IntroState : 게임의 모든 상태를 초기화하여 새 게임 시작 가능토록 **/
-
-
     void CreatePlayer()
     {
         player1 = Instantiate(GameManager.Instance.player1Prefab);
-        alivePlayer = 1;
+        alivePlayers = 1;
         if (GameManager.Instance.CurrentGameMode == GameMode.MultiPlayer)
         {
             player2 = Instantiate(GameManager.Instance.player2Prefab);
-            alivePlayer++;
+            alivePlayers++;
         }
     }
 
@@ -109,30 +94,42 @@ public class InGameController : MonoBehaviour
 
         Time.timeScale = 1;
 
-        // 적 생성
-        InvokeRepeating("CreateEnemys", 0f, enemyCreateDelay);
+        // TODO : 적 생성
+        // StageManager.Instance.~();
+        // StageManager.Instance.MakeEmeny();// 임시
     }
 
 
-    // 적 오브젝트 생성
-    public void CreateEnemys()
-    {
-        Instantiate(enemy);
-    }
 
-    // Player가 적 오브젝트와 충돌할 경우(=게임 오버) 이 함수 호출토록함
     public void GameOver()
     {
+        // 시간 정지
         Time.timeScale = 0f;
 
+        // 최고 점수 계산
         if (currentTime > highScore)
         {
             highScore = currentTime;
+            highScoreText.text = highScore.ToString("N3");
         }
-
-        // 게임 종료 UI 열기
-        GameManager.Instance.GameOverState();
     }
 
+    public void Restart()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
+    }
     
+
+    public void PlayerDead()
+    {
+        // TODO : 부활 아이템 등을 넣을거라면 1P 2P 누가 살아있는지 체크도 해야 함
+        alivePlayers--;
+
+        if(alivePlayers == 0)
+        {
+            // 게임 오버
+            GameManager.Instance.GameOverState();
+        }
+    }
 }

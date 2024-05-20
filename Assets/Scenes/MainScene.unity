@@ -441,6 +441,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60547ca77c9a70a4cb9d6c7336813217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IntroUI: {fileID: 0}
+  PlayUI: {fileID: 0}
+  SelectCharUI: {fileID: 0}
+  GameOverUI: {fileID: 0}
 --- !u!4 &1340484802
 Transform:
   m_ObjectHideFlags: 0
