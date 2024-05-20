@@ -70,11 +70,13 @@ public class InGameController : MonoBehaviour
     /** IntroState : 게임의 모든 상태를 초기화하여 새 게임 시작 가능토록 **/
     void CreatePlayer()
     {
-        player1 = Instantiate(GameManager.Instance.player1Prefab);
+        Vector3 player1StartPosition = new Vector3 (0f, -4.2f, 0);
+        Vector3 player2StartPosition = new Vector3(1.4f, -4.2f, 0);
+        player1 = Instantiate(GameManager.Instance.player1Prefab, player1StartPosition, Quaternion.identity);
         alivePlayers = 1;
         if (GameManager.Instance.CurrentGameMode == GameMode.MultiPlayer)
         {
-            player2 = Instantiate(GameManager.Instance.player2Prefab);
+            player2 = Instantiate(GameManager.Instance.player2Prefab, player2StartPosition, Quaternion.identity);
             alivePlayers++;
         }
     }
@@ -104,6 +106,8 @@ public class InGameController : MonoBehaviour
 
     public void GameOver()
     {
+        Debug.Log("#### GameOver ####");
+
         // 시간 정지
         Time.timeScale = 0f;
 

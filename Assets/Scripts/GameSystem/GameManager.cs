@@ -49,6 +49,9 @@ public class GameManager : MonoBehaviour
             Instance = this;
             CurrentGameState = GameState.Intro;
             CurrentGameMode = GameMode.SinglePlayer;
+
+            Application.targetFrameRate = 60;
+
             DontDestroyOnLoad(gameObject);
         }
         else
