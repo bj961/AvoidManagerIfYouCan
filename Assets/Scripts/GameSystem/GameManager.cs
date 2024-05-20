@@ -27,14 +27,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    // TODO : state 관리를 이벤트로 해야되나??
-    //public delegate void GameStart();
-    //public event GameStart OnGameStart;
-
-    public delegate void GameStateDelegate();
-    public event GameStateDelegate OnIntroState;
-    public event GameStateDelegate OnGameStart;
-    public event GameStateDelegate OnGameOver;
 
     public GameState CurrentGameState { get; private set; }
     public GameMode CurrentGameMode { get; private set; }
@@ -76,9 +68,12 @@ public class GameManager : MonoBehaviour
     {
         inGameController = FindObjectOfType<InGameController>();
 
-        // 테스트용 임시 코드
-        CurrentGameState = GameState.GameStart;
+        CurrentGameState = GameState.GameStart; // 테스트용 임시 코드
 
+        if (CurrentGameState != GameState.GameStart)
+        {
+            CurrentGameState = GameState.Intro;
+        }
 
         // TODO : state를 이벤트 기반으로 변경한다면 이 코드도 수정할 것
         switch (CurrentGameState)
