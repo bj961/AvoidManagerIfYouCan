@@ -31,7 +31,9 @@ public class GameManager : MonoBehaviour
     //public event GameStart OnGameStart;
 
     public delegate void GameStateDelegate();
-    public event GameStateDelegate onIntroState;
+    public event GameStateDelegate OnIntroState;
+    public event GameStateDelegate OnGameStart;
+    public event GameStateDelegate OnGameOver;
 
     public GameState CurrentGameState { get; private set; }
     public GameMode CurrentGameMode { get; private set; }
@@ -52,6 +54,7 @@ public class GameManager : MonoBehaviour
             Instance = this;
             CurrentGameState = GameState.Intro;
             CurrentGameMode = GameMode.SinglePlayer;
+            //CurrentGameMode = GameMode.MultiPlayer; //테스트용
 
             Application.targetFrameRate = 60;
 
@@ -72,7 +75,7 @@ public class GameManager : MonoBehaviour
         CurrentGameState = GameState.GameStart;
 
 
-        // TODO : state 이벤트 기반으로 변경한다면 이 코드도 수정할 것
+        // TODO : state를 이벤트 기반으로 변경한다면 이 코드도 수정할 것
         switch (CurrentGameState)
         {
             case GameState.Intro:
@@ -98,6 +101,10 @@ public class GameManager : MonoBehaviour
 
         // TODO : 시작화면 UI 열기
         // UIManager.Instance.~~();
+
+        // TODO : 음악 실행 호출은 GameManager에서? InGameController에서?
+        // 게임 state와 연관된 거니까 GameManager에서 처리하는게 맞나?
+        SoundManager.Instance.PlayBGM(SoundManager.Instance.introBGM);
 
     }
 
@@ -149,6 +156,8 @@ public class GameManager : MonoBehaviour
 
         // 게임 시작
         inGameController.InGameStart();
+
+        SoundManager.Instance.PlayBGM(SoundManager.Instance.playBGM);
     }
 
 
@@ -157,6 +166,8 @@ public class GameManager : MonoBehaviour
     public void GameOverState()
     {
         CurrentGameState = GameState.GameOver;
+
+        SoundManager.Instance.PlaySoundOnce(SoundManager.Instance.gameOverSound);
 
         inGameController.GameOver();
 
