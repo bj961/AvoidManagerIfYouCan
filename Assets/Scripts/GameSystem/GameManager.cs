@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
         StageManager.Instance.SetDifficulty(0);
 
         // 시작화면 UI 열기
-
+        // UIManager.Instance.~~();
 
     }
 
@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
     {
         CurrentGameState = GameState.SelectCharacter;
         // 캐릭터 선택 UI 열기
-
+        // UIManager.Instance.~~();
 
         // 캐릭터 선택
         for (int i = 0; i< playerNumber; i++) 
@@ -110,9 +110,12 @@ public class GameManager : MonoBehaviour
         // 버튼으로 난이도 선택
         // 해당 버튼에서 StageManager.Instacne.SetDifficulty()호출
         // 게임 시작 누르면 해당 버튼에서 GameStartState() 호출
+        // UIManager.Instance.~~();
     }
 
 
+
+    // TODO : ~~~ 어떻게 처리할까
 
     // State : 게임 시작
     // 게임 시작 or 다시 하기 버튼 누르면 호출
@@ -129,13 +132,13 @@ public class GameManager : MonoBehaviour
     public void GameOverState()
     {
         CurrentGameState = GameState.GameOver;
-        Time.timeScale = 0f;
-        
+
         // 게임 오버 관련 처리
-        // 최고 점수 갱신
-        //inGameController.함수();
+        // 최고 점수 갱신 등
+        inGameController.GameOver();
 
         // 게임 종료 UI 열기
+        // UIManager.Instance.~~();
     }
 
 }
