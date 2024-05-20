@@ -24,4 +24,9 @@ public class PlayerInputController : CharacterMoveController
             characterSpriteRenderer.flipX = true;
         }
     }
+
+    public void OnSprint(InputValue value)
+    {
+        IsSprint = value.isPressed;
+    }
 }
