@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 
 public enum GameState
@@ -38,13 +39,17 @@ public class GameManager : MonoBehaviour
     public GameState CurrentGameState { get; private set; }
     public GameMode CurrentGameMode { get; private set; }
 
+    public void SetGameMode(GameMode newGameMode)
+    {
+        CurrentGameMode = newGameMode;
+    }
+
+
     public InGameController inGameController;
 
     // 캐릭터 프리팹
     public GameObject player1Prefab;
     public GameObject player2Prefab;
-
-
 
 
     private void Awake()
@@ -102,10 +107,7 @@ public class GameManager : MonoBehaviour
         // TODO : 시작화면 UI 열기
         // UIManager.Instance.~~();
 
-        // TODO : 음악 실행 호출은 GameManager에서? InGameController에서?
-        // 게임 state와 연관된 거니까 GameManager에서 처리하는게 맞나?
         SoundManager.Instance.PlayBGM(SoundManager.Instance.introBGM);
-
     }
 
     void InitSelectedCharacter()
@@ -116,7 +118,7 @@ public class GameManager : MonoBehaviour
 
 
     // State : 캐릭터 선택
-    public void SelectCharacterState(int playerNumber)
+    public void SelectCharacterState()
     {
         CurrentGameState = GameState.SelectCharacter;
 
@@ -125,7 +127,7 @@ public class GameManager : MonoBehaviour
 
         // TODO : 캐릭터 선택
         // player1Prefab, player2Prefab 에 프리팹 할당토록
-        // 
+        // 캐릭터 선택 완료되면 다음 state로
     }
 
 
@@ -140,7 +142,7 @@ public class GameManager : MonoBehaviour
         // TODO : 난이도 선택 UI 열기
         // UIManager.Instance.~~();
 
-        // TODO : 난이도 선택 로직
+        // TODO : 난이도 선택
     }
 
 
@@ -173,6 +175,12 @@ public class GameManager : MonoBehaviour
 
         // TODO : 게임 종료 UI 열기
         // UIManager.Instance.~~();
+    }
+
+    public void Restart()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
     }
 
 }
