@@ -3,9 +3,15 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+public enum MonsterType
+{
+    EnemyHyuk,
+    EnemyUrock
+}
+
 public class Enemy : MonoBehaviour
 {
-
+    [SerializeField] private MonsterType monsterType;
     int EnemyCount;
     float Speed = 0.02f;
     Sprite sprite;
@@ -16,18 +22,16 @@ public class Enemy : MonoBehaviour
         float y = 3.0f;
         //Spawn point
         transform.position = new Vector2(x, y);
-        
-
-        if (EnemyCount == 1)
-        {
-            Speed = 0.05f;
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
         // -Y Speed Control
+        if (monsterType == MonsterType.EnemyUrock)
+        {
+            Speed += Time.deltaTime * 0.05f;
+        }
         transform.position += Vector3.down * Speed;
         if (transform.position.y < -7.0f)
         {

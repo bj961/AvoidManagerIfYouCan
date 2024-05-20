@@ -70,11 +70,13 @@ public class InGameController : MonoBehaviour
     /** IntroState : 게임의 모든 상태를 초기화하여 새 게임 시작 가능토록 **/
     void CreatePlayer()
     {
-        player1 = Instantiate(GameManager.Instance.player1Prefab);
+        Vector3 player1StartPosition = new Vector3 (0f, -4.2f, 0);
+        Vector3 player2StartPosition = new Vector3(1.4f, -4.2f, 0);
+        player1 = Instantiate(GameManager.Instance.player1Prefab, player1StartPosition, Quaternion.identity);
         alivePlayers = 1;
         if (GameManager.Instance.CurrentGameMode == GameMode.MultiPlayer)
         {
-            player2 = Instantiate(GameManager.Instance.player2Prefab);
+            player2 = Instantiate(GameManager.Instance.player2Prefab, player2StartPosition, Quaternion.identity);
             alivePlayers++;
         }
     }
@@ -94,15 +96,18 @@ public class InGameController : MonoBehaviour
 
         Time.timeScale = 1;
 
-        // TODO : 적 생성
-        // StageManager.Instance.~();
-        // StageManager.Instance.MakeEmeny();// 임시
+        // TODO : 적 생성은 StageManager에서 수행!
+        // StageManager.Instance.~(); <- 필요 없음
+        // 다만 나중에 문제 생기면 GameState.GameStart 인 경우에만 생성되도록 하면 될듯
+
     }
 
 
 
     public void GameOver()
     {
+        Debug.Log("#### GameOver ####");
+
         // 시간 정지
         Time.timeScale = 0f;
 
@@ -121,6 +126,7 @@ public class InGameController : MonoBehaviour
     }
     
 
+    // TODO : 이벤트로 플레이어 사망시 호출되도록 구현
     public void PlayerDead()
     {
         // TODO : 부활 아이템 등을 넣을거라면 1P 2P 누가 살아있는지 체크도 해야 함
@@ -129,6 +135,7 @@ public class InGameController : MonoBehaviour
         if(alivePlayers == 0)
         {
             // 게임 오버
+            // TODO : 게임 오버도 이벤트로 받도록 구현?
             GameManager.Instance.GameOverState();
         }
     }
