@@ -263,7 +263,7 @@ GameObject:
   m_Component:
   - component: {fileID: 483800505}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Ground&WallsTemp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -708,7 +708,7 @@ GameObject:
   - component: {fileID: 1309571813}
   - component: {fileID: 1309571812}
   m_Layer: 0
-  m_Name: ground
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
