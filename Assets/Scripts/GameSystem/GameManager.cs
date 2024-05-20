@@ -30,6 +30,9 @@ public class GameManager : MonoBehaviour
     //public delegate void GameStart();
     //public event GameStart OnGameStart;
 
+    public delegate void GameStateDelegate();
+    public event GameStateDelegate onIntroState;
+
     public GameState CurrentGameState { get; private set; }
     public GameMode CurrentGameMode { get; private set; }
 
