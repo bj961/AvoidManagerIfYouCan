@@ -115,6 +115,8 @@ public class GameManager : MonoBehaviour
 
 
 
+    // TODO : ~~~ 어떻게 처리할까
+
     // State : 게임 시작
     // 게임 시작 or 다시 하기 버튼 누르면 호출
     public void GameStartState()
