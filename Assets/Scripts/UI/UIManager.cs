@@ -42,7 +42,7 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void OpenPopup(int num)
+    public void SelectPopup(int num)
     {   
         if (num < 1 || num > 4 ) throw new ArgumentOutOfRangeException("num", "The popup number must be between 1 and 4.");
 
@@ -57,5 +57,17 @@ public class UIManager : MonoBehaviour
                 UIArray[i].SetActive(false);
             }
         }
+    }
+
+    public void OpenPopUp(int num)
+    {
+        if (num < 1 || num > 4) throw new ArgumentOutOfRangeException("num", "The popup number must be between 1 and 4.");
+        UIArray[num-1].SetActive(true);
+    }
+
+    public void ClosePopUp(int num)
+    {
+        if (num < 1 || num > 4) throw new ArgumentOutOfRangeException("num", "The popup number must be between 1 and 4.");
+        UIArray[num - 1].SetActive(false);
     }
 }
