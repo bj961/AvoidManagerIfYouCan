@@ -26,8 +26,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public delegate void GameStart();
-    public event GameStart OnGameStart;
+    // TODO : state 관리를 이벤트로 해야되나??
+    //public delegate void GameStart();
+    //public event GameStart OnGameStart;
 
     public GameState CurrentGameState { get; private set; }
     public GameMode CurrentGameMode { get; private set; }
@@ -38,8 +39,7 @@ public class GameManager : MonoBehaviour
     public GameObject player1Prefab;
     public GameObject player2Prefab;
 
-    // UI
-    public GameObject CharacterSelectUI;
+
 
 
     private void Awake()
@@ -48,6 +48,10 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             CurrentGameState = GameState.Intro;
+            CurrentGameMode = GameMode.SinglePlayer;
+
+            Application.targetFrameRate = 60;
+
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -59,8 +63,25 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        CurrentGameState = GameState.Intro;
         inGameController = FindObjectOfType<InGameController>();
+
+        // 테스트용 임시 코드
+        CurrentGameState = GameState.GameStart;
+
+
+        // TODO : state 이벤트 기반으로 변경한다면 이 코드도 수정할 것
+        switch (CurrentGameState)
+        {
+            case GameState.Intro:
+                IntroState();
+                break;
+            case GameState.GameStart:
+                GameStartState();
+                break;
+            default:
+                break;
+        }
+
     }
 
 
@@ -69,11 +90,10 @@ public class GameManager : MonoBehaviour
     {
         CurrentGameState = GameState.Intro;
 
-        // 초기화
         InitSelectedCharacter();
         StageManager.Instance.SetDifficulty(0);
 
-        // 시작화면 UI 열기
+        // TODO : 시작화면 UI 열기
         // UIManager.Instance.~~();
 
     }
@@ -81,7 +101,7 @@ public class GameManager : MonoBehaviour
     void InitSelectedCharacter()
     {
         player1Prefab = null;
-        player2Prefab = null; 
+        player2Prefab = null;
     }
 
 
@@ -89,55 +109,55 @@ public class GameManager : MonoBehaviour
     public void SelectCharacterState(int playerNumber)
     {
         CurrentGameState = GameState.SelectCharacter;
-        // 캐릭터 선택 UI 열기
+
+        // TODO : 캐릭터 선택 UI 열기
         // UIManager.Instance.~~();
 
-        // 캐릭터 선택
-        for (int i = 0; i< playerNumber; i++) 
-        {
-
-        }
-
+        // TODO : 캐릭터 선택
+        // player1Prefab, player2Prefab 에 프리팹 할당토록
+        // 
     }
+
+
 
 
     // State : 난이도 선택
-    // 난이도 선택 기능을 넣는다면 구현할 함수
+    // TODO : 난이도 선택 기능을 넣는다면 구현할 부분
     public void SelectDifficultyState()
     {
         CurrentGameState = GameState.SelectDifficulty;
-        // 난이도 선택 UI 열기
-        // 버튼으로 난이도 선택
-        // 해당 버튼에서 StageManager.Instacne.SetDifficulty()호출
-        // 게임 시작 누르면 해당 버튼에서 GameStartState() 호출
+
+        // TODO : 난이도 선택 UI 열기
         // UIManager.Instance.~~();
+
+        // TODO : 난이도 선택 로직
     }
 
 
 
-    // TODO : ~~~ 어떻게 처리할까
 
     // State : 게임 시작
-    // 게임 시작 or 다시 하기 버튼 누르면 호출
     public void GameStartState()
     {
         CurrentGameState = GameState.GameStart;
+
+        // TODO : 시작창 UI
+        // UIManager.Instance.~~();
+
         // 게임 시작
         inGameController.InGameStart();
     }
 
 
-    
+
     // State : 게임 종료
     public void GameOverState()
     {
         CurrentGameState = GameState.GameOver;
 
-        // 게임 오버 관련 처리
-        // 최고 점수 갱신 등
         inGameController.GameOver();
 
-        // 게임 종료 UI 열기
+        // TODO : 게임 종료 UI 열기
         // UIManager.Instance.~~();
     }
 

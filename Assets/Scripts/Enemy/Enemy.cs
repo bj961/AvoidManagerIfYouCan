@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public enum MonsterType 
+public enum MonsterType
 {
-    EnemyHyuk, 
+    EnemyHyuk,
     EnemyUrock
 }
 
@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         // -Y Speed Control
-        if(monsterType == MonsterType.EnemyUrock)
+        if (monsterType == MonsterType.EnemyUrock)
         {
             Speed += Time.deltaTime * 0.05f;
         }
