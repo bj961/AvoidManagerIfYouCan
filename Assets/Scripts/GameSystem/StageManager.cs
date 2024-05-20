@@ -25,7 +25,6 @@ public class StageManager : MonoBehaviour
     }
 
 
-    // Start is called before the first frame update
     void Start()
     {
         InvokeRepeating("MakeEnemy", 0f, 1f);
@@ -33,10 +32,6 @@ public class StageManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     void MakeEnemy()
     {
@@ -68,4 +63,7 @@ public class StageManager : MonoBehaviour
 
         //enemyCreateDelay -= 0.1f;
     }
+
+
+    // Àû »ý¼º
 }
