@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,15 +14,7 @@ public class UIManager : MonoBehaviour
 
     public static UIManager Instance { get; private set; }
 
-    public enum UIPopUp
-    {
-        Main = 0,
-        SelectCharacter,
-        Play,
-        GameOver
-    }
-
-    private GameObject[] UIList = new GameObject
+    public GameObject[] UIArray;
 
 
     private void Awake()
@@ -36,9 +29,7 @@ public class UIManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
 
-        UIList
-
-
+        UIArray = new GameObject[4] {IntroUI, SelectCharUI, PlayUI, GameOverUI};
     }
 
     void Start()
@@ -53,57 +44,18 @@ public class UIManager : MonoBehaviour
 
     public void OpenPopup(int num)
     {   
+        if (num < 1 || num > 4 ) throw new ArgumentOutOfRangeException("num", "The popup number must be between 1 and 4.");
 
-
-
-        gameObject.SetActive(true);
+        for (int i=0; i < UIArray.Length; i++)
+        {
+            if (i == num-1)
+            {
+                UIArray[i].SetActive(true);
+            }
+            else
+            {
+                UIArray[i].SetActive(false);
+            }
+        }
     }
-    public void ClosePopup(GameObject gameObject)
-    {
-        gameObject.SetActive(false);
-    }
-
-    public void SetIntroUI(bool isActive)
-    {
-        IntroUI.gameObject.SetActive(isActive);
-    }
-
-    public void SetPlayUI(bool isActive)
-    {
-        PlayUI.gameObject.SetActive(isActive);
-    }
-
-    public void SetSelectCharUI(bool isActive)
-    {
-        SelectCharUI.gameObject.SetActive(isActive);
-    }
-
-    public void SetGameOverUI(bool isActive)
-    {
-        GameOverUI.gameObject.SetActive(isActive);
-    }
-
-    public void OnClickDecideButton()
-    {
-
-    }
-
-    public void OnClickStartButton()
-    {
-        SetIntroUI(false);
-        SetPlayUI(false);
-
-    }
-
-    public void OnClickRestartButton()
-    {
-    }
-
-    public void OnClickGotoTitleButton()
-    {
-        SetIntroUI(true);
-        SetPlayUI(false);
-        SoundManager.Instance.ChangeBGM(SoundManager.Instance.introBGM);
-    }
-
 }
