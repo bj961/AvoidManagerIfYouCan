@@ -13,10 +13,10 @@ public class CharacterStaminaSystem : MonoBehaviour
     public float staminaConsumeRate = 1f;
     public float staminaRecoveryRate = 1f;
 
-    private bool isConsumeStamina = false;
+    //private bool isConsumeStamina = false;
 
-    public event Action OnSprint;
-    public event Action OnSprintEnd; // TODO : 애니메이션 연결해줄 때 사용해줘야 한다.
+    //public event Action OnSprint;
+    //public event Action OnSprintEnd; // TODO : 애니메이션 연결해줄 때 사용해줘야 한다.
 
 
     private void Awake()
@@ -37,7 +37,7 @@ public class CharacterStaminaSystem : MonoBehaviour
         if (currentStamina > 0.0f)
         {
             currentStamina = currentStamina - staminaConsumeRate * Time.deltaTime;
-            isConsumeStamina = true;
+            //isConsumeStamina = true;
             //Debug.Log(currentStamina);
         }
         return true;
@@ -50,7 +50,7 @@ public class CharacterStaminaSystem : MonoBehaviour
         if (currentStamina < MaxStamina)
         {
             currentStamina += staminaRecoveryRate * Time.deltaTime;
-            isConsumeStamina = false;
+            //isConsumeStamina = false;
             //Debug.Log(currentStamina);
         }
         return true;
