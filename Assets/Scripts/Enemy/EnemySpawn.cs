@@ -1,22 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class EnemySpawn : MonoBehaviour
 {
+    public GameObject EnemyUrock;
+    public GameObject EnemyHyuk;
 
     int EnemyCount;
     float Speed = 0.02f;
-    Sprite sprite;
 
     void Start()
     {
+        //x = - 2.7 ~ 2.7 길이까지 랜덤스폰좌표
         float x = Random.Range(-2.7f, 2.7f);
+
+        //y = 3.0 부터 - 7.0까지 떨어트릴 예정
         float y = 3.0f;
-        //Spawn point
         transform.position = new Vector2(x, y);
-        
 
         if (EnemyCount == 1)
         {
@@ -27,11 +28,13 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // -Y Speed Control
+        //-Y Down Speed 조절
         transform.position += Vector3.down * Speed;
+
         if (transform.position.y < -7.0f)
         {
-            Destroy(gameObject);
+            //Destroy GameObject
         }
+        //esle(transform.position.y == Charter) 부딪힐시 GameOver();
     }
 }

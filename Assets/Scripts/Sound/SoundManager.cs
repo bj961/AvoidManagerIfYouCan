@@ -10,30 +10,25 @@ public class SoundManager : MonoBehaviour
 
     public AudioSource audioSource;
 
-    public AudioClip introBGM;  //인트로 브금
-    public AudioClip playBGM;   //플레이 브금
+    public AudioClip introBGM;
+    public AudioClip playBGM;
 
-    //효과음들
-    public AudioClip gameOverSound;  //게임오버
-    public AudioClip clickSound;    //버튼클릭
-    public AudioClip onDamagedSound;    //피격
-    public AudioClip useItemSound;    //아이템 사용
-    public AudioClip gameClearSound;  //게임클리어
-
-    //public AudioClip otherSound;  //다른 효과음들
-    
+    public AudioClip gameOverSound;
+    public AudioClip clickSound;
+    public AudioClip onDamagedSound;
+    public AudioClip useItemSound;
+    public AudioClip gameClearSound;
 
     private void Awake()
     {
-        //싱글톤 처리
-        if (Instance == null)
+        if (Instance != null && Instance != this)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            Destroy(gameObject);
         }
         else
         {
-            Destroy(gameObject);
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
     }
 
@@ -44,16 +39,28 @@ public class SoundManager : MonoBehaviour
         audioSource.Play();
     }
 
-    public void ChangeBGM(AudioClip audioclip) //선택한 BGM 재생
+    public void ChangeBGM(AudioClip audioClip)
     {
-        //같은 BGM이 재생중이면 x
-        if (audioSource.clip == audioclip && audioSource.isPlaying) return;
-        audioSource.clip = audioclip;
+        if (audioSource.clip == audioClip && audioSource.isPlaying) return;
+        audioSource.clip = audioClip;
         audioSource.Play();
     }
 
-    public void PlaySoundOnce(AudioClip audioClip)  //사운드 1회 재생
+    public void PlaySoundOnce(AudioClip audioClip)
     {
         audioSource.PlayOneShot(audioClip);
     }
+
+    public void PlayBGM(AudioClip audioClip)
+    {
+        audioSource.clip = audioClip;
+        audioSource.Play();
+    }
+
+    public void PauseBGM()
+    {
+        if (audioSource.clip == null) return;
+        audioSource.Pause();
+    }
+
 }
