@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 1396814152823649429}
   - component: {fileID: 1832406910143975095}
   - component: {fileID: 5989810790689930688}
+  - component: {fileID: 4521974120596359247}
   m_Layer: 0
   m_Name: EnemyUrock
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -165,4 +166,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc68571c49ba42442a4025f50a8e0392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyUrock: {fileID: 6816142288798745039}
+  monsterType: 1
+--- !u!114 &4521974120596359247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6816142288798745039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb58e2b5eb0581b47b9ed9d16fd8762d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTag: Player
+  enemyDamage: 2

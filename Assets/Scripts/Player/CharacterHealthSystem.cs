@@ -55,6 +55,8 @@ public class CharacterHealtSystem : MonoBehaviour
         timeSinceLastChange = 0;
         CurrentHealth += change;
         CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
+        Debug.Log("충돌 "+CurrentHealth);
+
 
         if (CurrentHealth <= 0.0f)
         {

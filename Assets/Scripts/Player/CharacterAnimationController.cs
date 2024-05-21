@@ -43,12 +43,12 @@ public class CharacterAnimationController : AnimationController
     //TODO : 플레이어 캐릭터 애니메이션 연결해주기 아직 미연결
     private void Hit()
     {
-        animator.SetBool(IsHit, true);
+        //animator.SetBool(IsHit, true);
     }
 
     private void InvinsibilityEnd()
     {
-        animator.SetBool(IsHit, false);
+        //animator.SetBool(IsHit, false);
     }
 
 }
