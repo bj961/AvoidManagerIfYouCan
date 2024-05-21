@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8188086498324814457}
   - component: {fileID: 981807468261362294}
   - component: {fileID: 6394316791777541757}
+  - component: {fileID: 4338040753510220237}
   m_Layer: 0
   m_Name: CharacterBase
   m_TagString: Untagged
@@ -198,6 +199,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   staminaConsumeRate: 10
   staminaRecoveryRate: 2
+--- !u!114 &4338040753510220237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2051234154461792849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d5fde8c4bf4dc44d824241dd7c13835, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthChangeDelay: 0.5
 --- !u!1 &7347997436643082830
 GameObject:
   m_ObjectHideFlags: 0
