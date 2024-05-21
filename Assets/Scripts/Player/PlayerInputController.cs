@@ -28,5 +28,12 @@ public class PlayerInputController : CharacterMoveController
     public void OnSprint(InputValue value)
     {
         IsSprint = value.isPressed;
+
+        //TODO : x의 움직임이 없을 땐 눌리지 않게 해주기
+        //Vector2 sprintInput = value.Get<Vector2>().normalized;
+        //if (sprintInput.x == 0)
+        //{
+        //    IsSprint = false;
+        //}
     }
 }
