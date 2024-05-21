@@ -70,24 +70,16 @@ public class GameManager : MonoBehaviour
 
         CurrentGameState = GameState.GameStart; // 테스트용 임시 코드
 
-        if (CurrentGameState != GameState.GameStart)
+        // TODO : state를 이벤트 기반으로 변경한다면 이 코드도 수정할 것
+        if (CurrentGameState == GameState.GameStart)
+        {
+            GameStartState();
+        }
+        else
         {
             CurrentGameState = GameState.Intro;
+            IntroState();
         }
-
-        // TODO : state를 이벤트 기반으로 변경한다면 이 코드도 수정할 것
-        switch (CurrentGameState)
-        {
-            case GameState.Intro:
-                IntroState();
-                break;
-            case GameState.GameStart:
-                GameStartState();
-                break;
-            default:
-                break;
-        }
-
     }
 
 
@@ -172,10 +164,15 @@ public class GameManager : MonoBehaviour
         // UIManager.Instance.~~();
     }
 
-    public void Restart()
+    public void ResetGame()
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentSceneName);
     }
 
+    public void RestartGame()
+    {
+        CurrentGameState = GameState.GameStart;
+        ResetGame();
+    }
 }
