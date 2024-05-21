@@ -16,6 +16,6 @@ public class GameOverButton : MonoBehaviour
 
     void GameOver()
     {
-        GameManager.Instance.GameOverState();
+        GameManager.Instance.GameOver();
     }
 }

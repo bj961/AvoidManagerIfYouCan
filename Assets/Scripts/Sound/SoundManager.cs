@@ -10,14 +10,7 @@ public class SoundManager : MonoBehaviour
 
     public AudioSource audioSource;
 
-    public AudioClip introBGM;
-    public AudioClip playBGM;
-
-    public AudioClip gameOverSound;
-    public AudioClip clickSound;
-    public AudioClip onDamagedSound;
-    public AudioClip useItemSound;
-    public AudioClip gameClearSound;
+    public AudioClip introBGM, playBGM, clickSound, onDamagedSound, useItemSound, gameOverSound, gameClearSound;
 
     private void Awake()
     {
