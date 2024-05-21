@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-
+    
 
 /****** 인게임의 모든 동작 관리 ******/
 public class InGameController : MonoBehaviour
@@ -15,8 +15,10 @@ public class InGameController : MonoBehaviour
     private GameObject player1;
     private GameObject player2;
 
-    // TODO : 
+    // TODO : 멀티 플레이 구현 시 사용할 필드
     private int alivePlayers;
+
+    // TODO : 혹시 부활 기능 구현할 거라면 사용해야 할 필드
     private bool isPlayer1Alive;
     private bool isPlayer2Alive;
     
@@ -25,9 +27,6 @@ public class InGameController : MonoBehaviour
     public Text currentScoreText;
     public Text highScoreText;
 
-    // TODO : 캐릭터 선택 기능 구현한다면 해당 UI 연결하여 사용할것
-    // public GameObject CharacterSelectUI;
-
 
     // 경과 시간 = 점수
     private float currentTime;
@@ -35,9 +34,7 @@ public class InGameController : MonoBehaviour
     public float GetScore() { return currentTime; }
     public float GetHighScore() { return highScore; }
 
-
-   
-
+    
 
     // 게임 초기화
     void Start()
@@ -45,6 +42,8 @@ public class InGameController : MonoBehaviour
         //게임 초기화
         currentTime = 0;
 
+        GameManager.Instance.OnPlayerDead += PlayerDead;
+        GameManager.Instance.OnPlayerDead?.Invoke();
         // UI 연결
 
         currentScoreText.text = currentTime.ToString("N3");
@@ -119,11 +118,10 @@ public class InGameController : MonoBehaviour
         }
     }
 
-    public void Restart()
-    {
-        string currentSceneName = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(currentSceneName);
-    }
+
+
+
+
     
 
     // TODO : 이벤트로 플레이어 사망시 호출되도록 구현
@@ -134,8 +132,6 @@ public class InGameController : MonoBehaviour
 
         if(alivePlayers == 0)
         {
-            // 게임 오버
-            // TODO : 게임 오버도 이벤트로 받도록 구현?
             GameManager.Instance.GameOverState();
         }
     }

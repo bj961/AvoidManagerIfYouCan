@@ -27,7 +27,7 @@ public class StageManager : MonoBehaviour
         if (SpawnTime < EnemySpawnTime)
         {
             SpawnTime += Time.deltaTime;
-            Debug.Log(SpawnTime);
+            //Debug.Log(SpawnTime);
         }
         else if (SpawnTime >= EnemySpawnTime)
         {
