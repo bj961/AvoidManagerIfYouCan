@@ -33,6 +33,8 @@ public class CharacterOnDeath : MonoBehaviour
         {
             behaviour.enabled = false; // 가져온 걸 다 비활성화
         }
+
+        GameManager.Instance.inGameController.PlayerDead();
     }
 
 
