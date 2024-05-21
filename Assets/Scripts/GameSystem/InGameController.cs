@@ -15,7 +15,6 @@ public class InGameController : MonoBehaviour
     private GameObject player1;
     private GameObject player2;
 
-    // TODO : 멀티 플레이 구현 시 사용할 필드
     private int alivePlayers;
 
     // TODO : 혹시 부활 기능 구현할 거라면 사용해야 할 필드
@@ -24,6 +23,7 @@ public class InGameController : MonoBehaviour
     
 
     // 갱신할 UI들
+    // 인스펙터에서 연결 해야함
     public Text currentScoreText;
     public Text highScoreText;
 
@@ -36,16 +36,15 @@ public class InGameController : MonoBehaviour
 
     
 
+
     // 게임 초기화
     void Start()
     {
         //게임 초기화
         currentTime = 0;
 
-        GameManager.Instance.OnPlayerDead += PlayerDead;
-        GameManager.Instance.OnPlayerDead?.Invoke();
-        // UI 연결
 
+        // UI 연결
         currentScoreText.text = currentTime.ToString("N3");
         highScoreText.text = highScore.ToString("N3");
 
@@ -119,11 +118,6 @@ public class InGameController : MonoBehaviour
     }
 
 
-
-
-
-    
-
     // TODO : 이벤트로 플레이어 사망시 호출되도록 구현
     public void PlayerDead()
     {
@@ -132,7 +126,7 @@ public class InGameController : MonoBehaviour
 
         if(alivePlayers == 0)
         {
-            GameManager.Instance.GameOverState();
+            GameManager.Instance.GameOver();
         }
     }
 }

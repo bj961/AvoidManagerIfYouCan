@@ -22,6 +22,8 @@ public class Enemy : MonoBehaviour
         float y = 3.0f;
         //Spawn point
         transform.position = new Vector2(x, y);
+
+        GameManager.Instance.OnGameOver += DestroyObjectOnGameOver;
     }
 
     // Update is called once per frame
@@ -37,5 +39,10 @@ public class Enemy : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    void DestroyObjectOnGameOver()
+    {
+        Destroy(gameObject);
     }
 }

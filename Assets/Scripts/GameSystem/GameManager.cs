@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
+using System.Xml.Linq;
 
 
 public enum GameState
@@ -43,20 +44,8 @@ public class GameManager : MonoBehaviour
     public GameObject player1Prefab;
     public GameObject player2Prefab;
 
-    // TODO : delegate와 event 선언 위치 고민
-    // 1) OOP에 따라 플레이어 스크립트로 이동? 그러면 InGameController의 함수를 이벤트에 어떻게 등록할건가?
-    // -> 2) delegate와 event 선언은 전역 위치에 있는게 좋을 것 같은데 여기 두는게 낫지 않나?
-    // -> 3) 깔끔하게 EventManager를 만들어 관리? 이벤트 관리할 갯수 적은데 그냥 GameManager에 둬도 되지 않을까?
-    public delegate void PlayerDeathHandler();
-    public event PlayerDeathHandler OnPlayerDead;
-
-    public void PlayerDeadEvent()
-    {
-        OnPlayerDead?.Invoke();
-    }
-
-    // 플레이어에 두고, 플레이어를 구독하고, 게임 매니저에서 이걸 처리
-    // 옵저버 패턴 - 게임 매니저가 플레이어가 죽었는지 쳐다보다가 처리
+    public delegate void GameOverHandler();
+    public event GameOverHandler OnGameOver;
 
 
     private void Awake()
@@ -67,6 +56,8 @@ public class GameManager : MonoBehaviour
             CurrentGameState = GameState.Intro;
             CurrentGameMode = GameMode.SinglePlayer;
             //CurrentGameMode = GameMode.MultiPlayer; //테스트용
+
+            OnGameOver += GameOverState;
 
             Application.targetFrameRate = 60;
 
@@ -90,6 +81,10 @@ public class GameManager : MonoBehaviour
         {
             GameStartState();
         }
+        else if(CurrentGameState == GameState.GameOver)
+        {
+            GameOverState();
+        }
         else
         {
             CurrentGameState = GameState.Intro;
@@ -107,7 +102,7 @@ public class GameManager : MonoBehaviour
         StageManager.Instance.SetDifficulty(0);
 
         // TODO : 시작화면 UI 열기
-        // UIManager.Instance.~~();
+        //UIManager.Instance.SelectPopup("introUI");
 
         SoundManager.Instance.PlayBGM(SoundManager.Instance.introBGM);
     }
@@ -125,7 +120,7 @@ public class GameManager : MonoBehaviour
         CurrentGameState = GameState.SelectCharacter;
 
         // TODO : 캐릭터 선택 UI 열기
-        // UIManager.Instance.~~();
+        //UIManager.Instance.SelectPopup("selectUI");
 
         // TODO : 캐릭터 선택
         // player1Prefab, player2Prefab 에 프리팹 할당토록
@@ -140,7 +135,7 @@ public class GameManager : MonoBehaviour
         CurrentGameState = GameState.SelectDifficulty;
 
         // TODO : 난이도 선택 UI 열기
-        // UIManager.Instance.~~();
+        //UIManager.Instance.SelectPopup("selectDifficultyUI");
 
         // TODO : 난이도 선택
     }
@@ -152,7 +147,7 @@ public class GameManager : MonoBehaviour
         CurrentGameState = GameState.GameStart;
 
         // TODO : 시작창 UI
-        // UIManager.Instance.~~();
+        //UIManager.Instance.SelectPopup("playUI");
 
         // 게임 시작
         inGameController.InGameStart();
@@ -161,6 +156,10 @@ public class GameManager : MonoBehaviour
     }
 
 
+    public void GameOver()
+    {
+        OnGameOver?.Invoke();
+    }
 
     // State : 게임 종료
     public void GameOverState()
@@ -172,7 +171,7 @@ public class GameManager : MonoBehaviour
         inGameController.GameOver();
 
         // TODO : 게임 종료 UI 열기
-        // UIManager.Instance.~~();
+        //UIManager.Instance.SelectPopup("gameOverUI");
     }
 
     public void ResetGame()
