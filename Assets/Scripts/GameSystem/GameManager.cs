@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
+using System.Xml.Linq;
 
 
 public enum GameState
@@ -26,12 +28,15 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    // TODO : state 관리를 이벤트로 해야되나??
-    //public delegate void GameStart();
-    //public event GameStart OnGameStart;
 
     public GameState CurrentGameState { get; private set; }
     public GameMode CurrentGameMode { get; private set; }
+
+    public void SetGameMode(GameMode newGameMode)
+    {
+        CurrentGameMode = newGameMode;
+    }
+
 
     public InGameController inGameController;
 
@@ -39,7 +44,8 @@ public class GameManager : MonoBehaviour
     public GameObject player1Prefab;
     public GameObject player2Prefab;
 
-
+    public delegate void GameOverHandler();
+    public event GameOverHandler OnGameOver;
 
 
     private void Awake()
@@ -49,6 +55,9 @@ public class GameManager : MonoBehaviour
             Instance = this;
             CurrentGameState = GameState.Intro;
             CurrentGameMode = GameMode.SinglePlayer;
+            //CurrentGameMode = GameMode.MultiPlayer; //테스트용
+
+            OnGameOver += GameOverState;
 
             Application.targetFrameRate = 60;
 
@@ -65,23 +74,22 @@ public class GameManager : MonoBehaviour
     {
         inGameController = FindObjectOfType<InGameController>();
 
-        // 테스트용 임시 코드
-        CurrentGameState = GameState.GameStart;
+        CurrentGameState = GameState.GameStart; // 테스트용 임시 코드
 
-
-        // TODO : state 이벤트 기반으로 변경한다면 이 코드도 수정할 것
-        switch (CurrentGameState)
+        // TODO : state를 이벤트 기반으로 변경한다면 이 코드도 수정할 것
+        if (CurrentGameState == GameState.GameStart)
         {
-            case GameState.Intro:
-                IntroState();
-                break;
-            case GameState.GameStart:
-                GameStartState();
-                break;
-            default:
-                break;
+            GameStartState();
         }
-
+        else if(CurrentGameState == GameState.GameOver)
+        {
+            GameOverState();
+        }
+        else
+        {
+            CurrentGameState = GameState.Intro;
+            IntroState();
+        }
     }
 
 
@@ -94,8 +102,9 @@ public class GameManager : MonoBehaviour
         StageManager.Instance.SetDifficulty(0);
 
         // TODO : 시작화면 UI 열기
-        // UIManager.Instance.~~();
+        //UIManager.Instance.SelectPopup("introUI");
 
+        SoundManager.Instance.PlayBGM(SoundManager.Instance.introBGM);
     }
 
     void InitSelectedCharacter()
@@ -106,19 +115,17 @@ public class GameManager : MonoBehaviour
 
 
     // State : 캐릭터 선택
-    public void SelectCharacterState(int playerNumber)
+    public void SelectCharacterState()
     {
         CurrentGameState = GameState.SelectCharacter;
 
         // TODO : 캐릭터 선택 UI 열기
-        // UIManager.Instance.~~();
+        //UIManager.Instance.SelectPopup("selectUI");
 
         // TODO : 캐릭터 선택
         // player1Prefab, player2Prefab 에 프리팹 할당토록
-        // 
+        // 캐릭터 선택 완료되면 다음 state로
     }
-
-
 
 
     // State : 난이도 선택
@@ -128,12 +135,10 @@ public class GameManager : MonoBehaviour
         CurrentGameState = GameState.SelectDifficulty;
 
         // TODO : 난이도 선택 UI 열기
-        // UIManager.Instance.~~();
+        //UIManager.Instance.SelectPopup("selectDifficultyUI");
 
-        // TODO : 난이도 선택 로직
+        // TODO : 난이도 선택
     }
-
-
 
 
     // State : 게임 시작
@@ -142,23 +147,42 @@ public class GameManager : MonoBehaviour
         CurrentGameState = GameState.GameStart;
 
         // TODO : 시작창 UI
-        // UIManager.Instance.~~();
+        //UIManager.Instance.SelectPopup("playUI");
 
         // 게임 시작
         inGameController.InGameStart();
+
+        SoundManager.Instance.PlayBGM(SoundManager.Instance.playBGM);
     }
 
 
+    public void GameOver()
+    {
+        OnGameOver?.Invoke();
+    }
 
     // State : 게임 종료
     public void GameOverState()
     {
         CurrentGameState = GameState.GameOver;
 
+        SoundManager.Instance.PlaySoundOnce(SoundManager.Instance.gameOverSound);
+
         inGameController.GameOver();
 
         // TODO : 게임 종료 UI 열기
-        // UIManager.Instance.~~();
+        //UIManager.Instance.SelectPopup("gameOverUI");
     }
 
+    public void ResetGame()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
+    }
+
+    public void RestartGame()
+    {
+        CurrentGameState = GameState.GameStart;
+        ResetGame();
+    }
 }

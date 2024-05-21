@@ -22,20 +22,27 @@ public class Enemy : MonoBehaviour
         float y = 3.0f;
         //Spawn point
         transform.position = new Vector2(x, y);
+
+        GameManager.Instance.OnGameOver += DestroyObjectOnGameOver;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         // -Y Speed Control
         if (monsterType == MonsterType.EnemyUrock)
         {
-            Speed += Time.deltaTime * 0.05f;
+            Speed += Time.deltaTime * 0.05f; // 전부 변수로
         }
         transform.position += Vector3.down * Speed;
-        if (transform.position.y < -7.0f)
+        if (transform.position.y < -7.0f) // 변수로
         {
             Destroy(gameObject);
         }
+    }
+
+    void DestroyObjectOnGameOver()
+    {
+        Destroy(gameObject);
     }
 }
