@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-
+    
 
 /****** 인게임의 모든 동작 관리 ******/
 public class InGameController : MonoBehaviour
@@ -34,14 +34,16 @@ public class InGameController : MonoBehaviour
     public float GetScore() { return currentTime; }
     public float GetHighScore() { return highScore; }
 
+    
 
-   
     // 게임 초기화
     void Start()
     {
         //게임 초기화
         currentTime = 0;
 
+        GameManager.Instance.OnPlayerDead += PlayerDead;
+        GameManager.Instance.OnPlayerDead?.Invoke();
         // UI 연결
 
         currentScoreText.text = currentTime.ToString("N3");
@@ -116,7 +118,10 @@ public class InGameController : MonoBehaviour
         }
     }
 
-    
+
+
+
+
     
 
     // TODO : 이벤트로 플레이어 사망시 호출되도록 구현
@@ -127,8 +132,6 @@ public class InGameController : MonoBehaviour
 
         if(alivePlayers == 0)
         {
-            // 게임 오버
-            // TODO : 게임 오버도 이벤트로 받도록 구현?
             GameManager.Instance.GameOverState();
         }
     }

@@ -43,6 +43,21 @@ public class GameManager : MonoBehaviour
     public GameObject player1Prefab;
     public GameObject player2Prefab;
 
+    // TODO : delegate와 event 선언 위치 고민
+    // 1) OOP에 따라 플레이어 스크립트로 이동? 그러면 InGameController의 함수를 이벤트에 어떻게 등록할건가?
+    // -> 2) delegate와 event 선언은 전역 위치에 있는게 좋을 것 같은데 여기 두는게 낫지 않나?
+    // -> 3) 깔끔하게 EventManager를 만들어 관리? 이벤트 관리할 갯수 적은데 그냥 GameManager에 둬도 되지 않을까?
+    public delegate void PlayerDeathHandler();
+    public event PlayerDeathHandler OnPlayerDead;
+
+    public void PlayerDeadEvent()
+    {
+        OnPlayerDead?.Invoke();
+    }
+
+    // 플레이어에 두고, 플레이어를 구독하고, 게임 매니저에서 이걸 처리
+    // 옵저버 패턴 - 게임 매니저가 플레이어가 죽었는지 쳐다보다가 처리
+
 
     private void Awake()
     {
@@ -118,8 +133,6 @@ public class GameManager : MonoBehaviour
     }
 
 
-
-
     // State : 난이도 선택
     // TODO : 난이도 선택 기능을 넣는다면 구현할 부분
     public void SelectDifficultyState()
@@ -131,8 +144,6 @@ public class GameManager : MonoBehaviour
 
         // TODO : 난이도 선택
     }
-
-
 
 
     // State : 게임 시작
