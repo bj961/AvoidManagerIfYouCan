@@ -75,6 +75,6 @@ public class UIManager : MonoBehaviour
      public void ClosePopUp(string uiName)
      {
          if (uiDictionary[uiName] == null) Debug.LogError($"Key '{uiName}' does not exist in the dictionary.");
-        uiDictionary[uiName].SetActive(true);
+        uiDictionary[uiName].SetActive(false);
      }
 }
