@@ -24,7 +24,6 @@ public enum GameMode
 }
 
 
-/****** 게임 상태 관리 ******/
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
@@ -66,8 +65,14 @@ public class GameManager : MonoBehaviour
         }
 
         InitializeGameManager();
+
     }
 
+    void Start()
+    {
+        playerPrefab = new GameObject[2];
+        playerInputAsset = new InputActionAsset[2];
+    }
 
     void InitializeGameManager()
     {
@@ -77,12 +82,11 @@ public class GameManager : MonoBehaviour
 
         InitSelectedCharacter();
 
-        // TODO : state를 이벤트 기반으로 변경한다면 이 코드도 수정할 것
         if (CurrentGameState == GameState.Intro)
         {
             IntroState();
         }
-        if (CurrentGameState == GameState.GameStart)
+        else if (CurrentGameState == GameState.GameStart)
         {
             GameStartState();
         }
@@ -93,23 +97,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        playerPrefab = new GameObject[2];
-        playerInputAsset = new InputActionAsset[2];
-    }
-
 
     // State : 시작 화면
     public void IntroState()
     {
         CurrentGameState = GameState.Intro;
-
-
-        //StageManager.Instance.SetDifficulty(0);
-
         UIManager.Instance.SelectPopup("introUI");
-
         SoundManager.Instance.PlayBGM(SoundManager.Instance.introBGM);
     }
 
@@ -125,8 +118,6 @@ public class GameManager : MonoBehaviour
     // State : 캐릭터 선택
     public void SelectCharacterState()
     {
-        //Debug.Log("#### CharacterSelect ####");
-
         CurrentGameState = GameState.SelectCharacter;
 
         switch (CurrentGameMode)
@@ -156,8 +147,6 @@ public class GameManager : MonoBehaviour
     // State : 게임 시작
     public void GameStartState()
     {
-        //Debug.Log("#### GameStart ####");
-
         CurrentGameState = GameState.GameStart;
         UIManager.Instance.SelectPopup("playUI");
         SoundManager.Instance.PlayBGM(SoundManager.Instance.playBGM);
@@ -168,8 +157,6 @@ public class GameManager : MonoBehaviour
     // State : 게임 종료
     public void GameOverState()
     {
-        //Debug.Log("#### GameOver ####");
-
         CurrentGameState = GameState.GameOver;
         UIManager.Instance.SelectPopup("gameOverUI");
         SoundManager.Instance.PlaySoundOnce(SoundManager.Instance.gameOverSound);
@@ -184,17 +171,11 @@ public class GameManager : MonoBehaviour
     {
         inGameController.InitializeInGameController();
         IntroState();
-
-        //string currentSceneName = SceneManager.GetActiveScene().name;
-        //SceneManager.LoadScene(currentSceneName);
     }
 
     public void RestartGame()
     {
         inGameController.InitializeInGameController();
         GameStartState();
-
-        //CurrentGameState = GameState.GameStart;
-        //ResetGame();
     }
 }

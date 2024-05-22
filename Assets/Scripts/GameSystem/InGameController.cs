@@ -7,8 +7,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
-
-/****** 인게임의 모든 동작 관리 ******/
 public class InGameController : MonoBehaviour
 {
     public static InGameController Instance;
