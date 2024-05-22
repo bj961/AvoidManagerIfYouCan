@@ -70,6 +70,8 @@ public class InGameController : MonoBehaviour
         // 플레이어 캐릭터 생성
         CreatePlayer();
 
+        Debug.Log("## InGameStart() ##\nalivePlayers : " + alivePlayers);
+
         Time.timeScale = 1;
     }
 
