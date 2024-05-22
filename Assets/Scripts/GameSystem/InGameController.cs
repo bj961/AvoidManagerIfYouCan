@@ -62,14 +62,6 @@ public class InGameController : MonoBehaviour
     {
         currentTime = 0;
         LoadHighScore();
-
-        for(int i = 0; i < (int)GameManager.Instance.CurrentGameMode; i++)
-        {
-            if(players[i] != null)
-            {
-                //Destroy(players[i]);
-            }
-        }
     }
 
     public void InGameStart()
@@ -77,8 +69,6 @@ public class InGameController : MonoBehaviour
         CreatePlayer();
 
         Debug.Log("## InGameStart() ##\nalivePlayers : " + alivePlayers);
-
-        Time.timeScale = 1;
     }
 
 

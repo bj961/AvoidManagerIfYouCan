@@ -39,15 +39,4 @@ public class StageManager : MonoBehaviour
             SpawnTime = 0;
         }
     }
-
-    public void SetDifficulty(int newDifficulty)
-    {
-        difficulty = newDifficulty;
-
-
-        //난이도 세팅
-        // 임시) 게임 빨라지도록 하여 난이도 상승
-        Time.timeScale = 1f + 0.3f * difficulty;
-
-    }
 }
