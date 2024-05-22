@@ -314,7 +314,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4206947297816353028
 RectTransform:
   m_ObjectHideFlags: 0
@@ -420,8 +420,8 @@ MonoBehaviour:
   - {fileID: 8229425052579741657}
   - {fileID: 3567937207770976091}
   startGameButton: {fileID: 1994739344780566195}
-  selectedButtons: []
   selectedCharacterPrefab: []
+  selectedButtons: []
 --- !u!1 &2868136259309702679
 GameObject:
   m_ObjectHideFlags: 0

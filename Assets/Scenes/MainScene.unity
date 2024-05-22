@@ -1091,10 +1091,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CharacterSelectMultiCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 1899194228217991988, guid: aadcc312bc1a495499281bdbaf837058, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4206947297816353028, guid: aadcc312bc1a495499281bdbaf837058, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1585,14 +1581,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 988564937}
     m_Modifications:
-    - target: {fileID: 3319227137915976112, guid: 13009e1760cdd0c4bb564f0cf21e7bb0, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3319227137915976112, guid: 13009e1760cdd0c4bb564f0cf21e7bb0, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3470731258157999395, guid: 13009e1760cdd0c4bb564f0cf21e7bb0, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1676,34 +1664,6 @@ PrefabInstance:
     - target: {fileID: 3699348348313380305, guid: 13009e1760cdd0c4bb564f0cf21e7bb0, type: 3}
       propertyPath: m_Name
       value: MainSceneCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 3699348348313380305, guid: 13009e1760cdd0c4bb564f0cf21e7bb0, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4259493235101268390, guid: 13009e1760cdd0c4bb564f0cf21e7bb0, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4259493235101268390, guid: 13009e1760cdd0c4bb564f0cf21e7bb0, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4533812702847326017, guid: 13009e1760cdd0c4bb564f0cf21e7bb0, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4533812702847326017, guid: 13009e1760cdd0c4bb564f0cf21e7bb0, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8921049825645037747, guid: 13009e1760cdd0c4bb564f0cf21e7bb0, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8921049825645037747, guid: 13009e1760cdd0c4bb564f0cf21e7bb0, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1891,10 +1851,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CharacterSelectSingleCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 5242043967033543492, guid: 2d3c237297526d246af6621b6a176ca5, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1991,10 +1947,6 @@ PrefabInstance:
     - target: {fileID: 4865150190927968231, guid: 2491d6f0ab4c4184a85af84ac14a7a36, type: 3}
       propertyPath: m_Name
       value: EndPanelCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 4865150190927968231, guid: 2491d6f0ab4c4184a85af84ac14a7a36, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

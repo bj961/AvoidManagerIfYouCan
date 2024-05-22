@@ -1136,8 +1136,8 @@ MonoBehaviour:
   - {fileID: 3236517610667918178}
   - {fileID: 5691155726999349529}
   startGameButton: {fileID: 2046827557998914733}
-  selectedButtons: []
   selectedCharacterPrefab: []
+  selectedButtons: []
 --- !u!1 &5781166708035040806
 GameObject:
   m_ObjectHideFlags: 0
