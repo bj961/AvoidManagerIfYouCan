@@ -9,7 +9,7 @@ public class CharacterStaminaSystem : MonoBehaviour
     // get만 구현된 것처럼 프로퍼티를 사용하는 것
     // 이렇게 하면 데이터의 복제본이 여기저기 돌아다니다가 싱크가 깨지는 문제를 막을 수 있어요!
     public float MaxStamina => characterStatHandler.currentStats.maxStamina;
-    public float currentStamina {  get; private set; }
+    public float currentStamina { get; private set; }
 
     public float staminaConsumeRate = 1f;
     public float staminaRecoveryRate = 1f;
@@ -42,7 +42,7 @@ public class CharacterStaminaSystem : MonoBehaviour
             staminaBar.SetMaxStamina(currentStamina);
         }
 
-        
+
     }
 
     public bool ChangeStamina()
