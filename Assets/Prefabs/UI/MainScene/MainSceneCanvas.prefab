@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 542fcf8086f92fd448190c7cee9c8aed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  staminaSlider: {fileID: 0}
+  staminaSlider: {fileID: 422327719847653245}
 --- !u!1 &1959201118848860299
 GameObject:
   m_ObjectHideFlags: 0
@@ -1393,4 +1393,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48dcdf37b63d14f4aa5ee1831fae27c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthSlider: {fileID: 0}
+  healthSlider: {fileID: 8277585766041851}
