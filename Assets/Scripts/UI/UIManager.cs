@@ -1,20 +1,23 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public GameObject IntroUI;
-    public GameObject PlayUI;
-    public GameObject SelectCharUI;
-    public GameObject GameOverUI;
-
     public static UIManager Instance { get; private set; }
 
-    public GameObject[] UIArray;
+    public GameObject introUI;
+    public GameObject playUI;
+    public GameObject singleCharSelectUI;
+    public GameObject multiCharSelectUI;
+    public GameObject gameOverUI;
+    public GameObject selectDifficultyUI;
+
+    public Dictionary<string,GameObject> uiDictionary;
 
 
     private void Awake()
@@ -29,12 +32,20 @@ public class UIManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
 
-        UIArray = new GameObject[4] {IntroUI, SelectCharUI, PlayUI, GameOverUI};
+        uiDictionary = new Dictionary<string, GameObject>
+        {
+            { "introUI", introUI },
+            { "playUI", playUI },
+            { "singleCharSelectUI", singleCharSelectUI },
+            { "multiCharSelectUI", multiCharSelectUI },
+            { "gameOverUI", gameOverUI },
+            { "selectDifficultyUI", selectDifficultyUI }
+        };
     }
 
     void Start()
     {
-
+        
     }
 
     void Update()
@@ -42,32 +53,30 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void SelectPopup(int num)
-    {   
-        if (num < 1 || num > 4 ) throw new ArgumentOutOfRangeException("num", "The popup number must be between 1 and 4.");
-
-        for (int i=0; i < UIArray.Length; i++)
+    public void SelectPopup(string uiName)
+    {
+        if (uiDictionary[uiName] == null) Debug.LogError($"Key '{uiName}' does not exist in the dictionary.");
+        foreach (KeyValuePair<string, GameObject> keyValuePair in uiDictionary)
         {
-            if (i == num-1)
+            if (keyValuePair.Key != uiName)
             {
-                UIArray[i].SetActive(true);
+                keyValuePair.Value.SetActive(false);
             }
             else
             {
-                UIArray[i].SetActive(false);
+                keyValuePair.Value.SetActive(true);
             }
         }
     }
 
-    public void OpenPopUp(int num)
+    public void OpenPopUp(string uiName)
     {
-        if (num < 1 || num > 4) throw new ArgumentOutOfRangeException("num", "The popup number must be between 1 and 4.");
-        UIArray[num-1].SetActive(true);
+        if (uiDictionary[uiName] == null) Debug.LogError($"Key '{uiName}' does not exist in the dictionary.");
+        uiDictionary[uiName].SetActive(true);
     }
-
-    public void ClosePopUp(int num)
-    {
-        if (num < 1 || num > 4) throw new ArgumentOutOfRangeException("num", "The popup number must be between 1 and 4.");
-        UIArray[num - 1].SetActive(false);
-    }
+     public void ClosePopUp(string uiName)
+     {
+         if (uiDictionary[uiName] == null) Debug.LogError($"Key '{uiName}' does not exist in the dictionary.");
+        uiDictionary[uiName].SetActive(false);
+     }
 }
