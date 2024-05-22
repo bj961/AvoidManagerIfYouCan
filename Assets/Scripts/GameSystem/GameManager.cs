@@ -23,7 +23,7 @@ public enum GameMode
 }
 
 
-/****** °ÔÀÓ »óÅÂ °ü¸® ******/
+/****** ê²Œì„ ìƒíƒœ ê´€ë¦¬ ******/
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
 
     public InGameController inGameController;
 
-    // Ä³¸¯ÅÍ ÇÁ¸®ÆÕ
+    // ìºë¦­í„° í”„ë¦¬íŒ¹
     public GameObject player1Prefab;
     public GameObject player2Prefab;
 
@@ -54,8 +54,8 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             CurrentGameState = GameState.Intro;
-            CurrentGameMode = GameMode.SinglePlayer;
-            //CurrentGameMode = GameMode.MultiPlayer; //Å×½ºÆ®¿ë
+            //CurrentGameMode = GameMode.SinglePlayer;
+            CurrentGameMode = GameMode.MultiPlayer; //í…ŒìŠ¤íŠ¸ìš©
 
             OnGameOver += GameOverState;
 
@@ -74,9 +74,9 @@ public class GameManager : MonoBehaviour
     {
         inGameController = FindObjectOfType<InGameController>();
 
-        CurrentGameState = GameState.GameStart; // Å×½ºÆ®¿ë ÀÓ½Ã ÄÚµå
+        CurrentGameState = GameState.GameStart; // í…ŒìŠ¤íŠ¸ìš© ì„ì‹œ ì½”ë“œ
 
-        // TODO : state¸¦ ÀÌº¥Æ® ±â¹İÀ¸·Î º¯°æÇÑ´Ù¸é ÀÌ ÄÚµåµµ ¼öÁ¤ÇÒ °Í
+        // TODO : stateë¥¼ ì´ë²¤íŠ¸ ê¸°ë°˜ìœ¼ë¡œ ë³€ê²½í•œë‹¤ë©´ ì´ ì½”ë“œë„ ìˆ˜ì •í•  ê²ƒ
         if (CurrentGameState == GameState.GameStart)
         {
             GameStartState();
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    // State : ½ÃÀÛ È­¸é
+    // State : ì‹œì‘ í™”ë©´
     public void IntroState()
     {
         CurrentGameState = GameState.Intro;
@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
         InitSelectedCharacter();
         StageManager.Instance.SetDifficulty(0);
 
-        // TODO : ½ÃÀÛÈ­¸é UI ¿­±â
+        // TODO : ì‹œì‘í™”ë©´ UI ì—´ê¸°
         //UIManager.Instance.SelectPopup("introUI");
 
         SoundManager.Instance.PlayBGM(SoundManager.Instance.introBGM);
@@ -114,42 +114,42 @@ public class GameManager : MonoBehaviour
     }
 
 
-    // State : Ä³¸¯ÅÍ ¼±ÅÃ
+    // State : ìºë¦­í„° ì„ íƒ
     public void SelectCharacterState()
     {
         CurrentGameState = GameState.SelectCharacter;
 
-        // TODO : Ä³¸¯ÅÍ ¼±ÅÃ UI ¿­±â
+        // TODO : ìºë¦­í„° ì„ íƒ UI ì—´ê¸°
         //UIManager.Instance.SelectPopup("selectUI");
 
-        // TODO : Ä³¸¯ÅÍ ¼±ÅÃ
-        // player1Prefab, player2Prefab ¿¡ ÇÁ¸®ÆÕ ÇÒ´çÅä·Ï
-        // Ä³¸¯ÅÍ ¼±ÅÃ ¿Ï·áµÇ¸é ´ÙÀ½ state·Î
+        // TODO : ìºë¦­í„° ì„ íƒ
+        // player1Prefab, player2Prefab ì— í”„ë¦¬íŒ¹ í• ë‹¹í† ë¡
+        // ìºë¦­í„° ì„ íƒ ì™„ë£Œë˜ë©´ ë‹¤ìŒ stateë¡œ
     }
 
 
-    // State : ³­ÀÌµµ ¼±ÅÃ
-    // TODO : ³­ÀÌµµ ¼±ÅÃ ±â´ÉÀ» ³Ö´Â´Ù¸é ±¸ÇöÇÒ ºÎºĞ
+    // State : ë‚œì´ë„ ì„ íƒ
+    // TODO : ë‚œì´ë„ ì„ íƒ ê¸°ëŠ¥ì„ ë„£ëŠ”ë‹¤ë©´ êµ¬í˜„í•  ë¶€ë¶„
     public void SelectDifficultyState()
     {
         CurrentGameState = GameState.SelectDifficulty;
 
-        // TODO : ³­ÀÌµµ ¼±ÅÃ UI ¿­±â
+        // TODO : ë‚œì´ë„ ì„ íƒ UI ì—´ê¸°
         //UIManager.Instance.SelectPopup("selectDifficultyUI");
 
-        // TODO : ³­ÀÌµµ ¼±ÅÃ
+        // TODO : ë‚œì´ë„ ì„ íƒ
     }
 
 
-    // State : °ÔÀÓ ½ÃÀÛ
+    // State : ê²Œì„ ì‹œì‘
     public void GameStartState()
     {
         CurrentGameState = GameState.GameStart;
 
-        // TODO : ½ÃÀÛÃ¢ UI
+        // TODO : ì‹œì‘ì°½ UI
         //UIManager.Instance.SelectPopup("playUI");
 
-        // °ÔÀÓ ½ÃÀÛ
+        // ê²Œì„ ì‹œì‘
         inGameController.InGameStart();
 
         SoundManager.Instance.PlayBGM(SoundManager.Instance.playBGM);
@@ -161,7 +161,7 @@ public class GameManager : MonoBehaviour
         OnGameOver?.Invoke();
     }
 
-    // State : °ÔÀÓ Á¾·á
+    // State : ê²Œì„ ì¢…ë£Œ
     public void GameOverState()
     {
         CurrentGameState = GameState.GameOver;
@@ -170,7 +170,7 @@ public class GameManager : MonoBehaviour
 
         inGameController.GameOver();
 
-        // TODO : °ÔÀÓ Á¾·á UI ¿­±â
+        // TODO : ê²Œì„ ì¢…ë£Œ UI ì—´ê¸°
         //UIManager.Instance.SelectPopup("gameOverUI");
     }
 
