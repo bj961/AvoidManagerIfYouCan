@@ -13,7 +13,7 @@ public class InGameController : MonoBehaviour
 {
     public static InGameController Instance;
 
-    private GameObject[] player;
+    private GameObject[] players;
     private int alivePlayers;
 
     // TODO : 혹시 부활 기능 구현할 거라면 사용할 필드
@@ -41,11 +41,10 @@ public class InGameController : MonoBehaviour
     // 게임 초기화
     void Start()
     {
-        player = new GameObject[2];
+        players = new GameObject[2];
 
         //게임 초기화
-        currentTime = 0;
-        LoadHighScore();
+        InitializeInGameController();
 
         // UI 연결
         currentScoreText.text = currentTime.ToString("N3");
@@ -66,7 +65,21 @@ public class InGameController : MonoBehaviour
         }
     }
 
-    internal void InGameStart()
+    public void InitializeInGameController()
+    {
+        currentTime = 0;
+        LoadHighScore();
+
+        for(int i = 0; i < (int)GameManager.Instance.CurrentGameMode; i++)
+        {
+            if(players[i] != null)
+            {
+                //Destroy(players[i]);
+            }
+        }
+    }
+
+    public void InGameStart()
     {
         // 플레이어 캐릭터 생성
         CreatePlayer();
@@ -85,9 +98,9 @@ public class InGameController : MonoBehaviour
         {
             if (GameManager.Instance.playerPrefab[i] != null)
             {
-                player[i] = Instantiate(GameManager.Instance.playerPrefab[i], playerStartPosition[i], Quaternion.identity);
+                players[i] = Instantiate(GameManager.Instance.playerPrefab[i], playerStartPosition[i], Quaternion.identity);
                 alivePlayers = i + 1;
-                PlayerInput playerInput = player[i].GetComponent<PlayerInput>();
+                PlayerInput playerInput = players[i].GetComponent<PlayerInput>();
                 playerInput.actions = GameManager.Instance.playerInputAsset[i];
             }
         }

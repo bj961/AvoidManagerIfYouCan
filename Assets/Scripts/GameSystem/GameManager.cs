@@ -52,51 +52,28 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            CurrentGameState = GameState.Intro;
-
-            OnGameOver += GameOverState;
+            DontDestroyOnLoad(gameObject);
 
             Application.targetFrameRate = 60;
-
-            DontDestroyOnLoad(gameObject);
+            inGameController = FindObjectOfType<InGameController>();
         }
         else
         {
             Destroy(gameObject);
         }
-
-        InitializeGameManager();
     }
 
 
-    void InitializeGameManager()
-    {
-        Debug.Log("## GameManager Start() ##\n" + CurrentGameState.ToString());
-
-        inGameController = FindObjectOfType<InGameController>();
-
-        InitSelectedCharacter();
-        
-        // TODO : state를 이벤트 기반으로 변경한다면 이 코드도 수정할 것
-        if (CurrentGameState == GameState.Intro)
-        {
-            IntroState();
-        }
-        if (CurrentGameState == GameState.GameStart)
-        {
-            GameStartState();
-        }
-        else
-        {
-            CurrentGameState = GameState.Intro;
-            IntroState();
-        }
-    }
 
     void Start()
     {
+        inGameController = FindObjectOfType<InGameController>();
         playerPrefab = new GameObject[2];
         playerInputAsset = new InputActionAsset[2];
+        OnGameOver += GameOverState;
+
+        CurrentGameState = GameState.Intro;
+        IntroState(); 
     }
 
 
@@ -104,12 +81,8 @@ public class GameManager : MonoBehaviour
     public void IntroState()
     {
         CurrentGameState = GameState.Intro;
-
-        
-        //StageManager.Instance.SetDifficulty(0);
-
+        InitSelectedCharacter();
         UIManager.Instance.SelectPopup("introUI");
-
         SoundManager.Instance.PlayBGM(SoundManager.Instance.introBGM);
     }
 
@@ -125,7 +98,7 @@ public class GameManager : MonoBehaviour
     // State : 캐릭터 선택
     public void SelectCharacterState()
     {
-        Debug.Log("#### CharacterSelect ####");
+        //Debug.Log("#### CharacterSelect ####");
 
         CurrentGameState = GameState.SelectCharacter;
 
@@ -141,7 +114,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    // State : 난이도 선택
+    // State : 난이도 선택(미구현)
     public void SelectDifficultyState()
     {
         Debug.Log("#### Difficulty Select ####");
@@ -156,33 +129,24 @@ public class GameManager : MonoBehaviour
     // State : 게임 시작
     public void GameStartState()
     {
-        Debug.Log("#### GameStart ####");
+        //Debug.Log("#### GameStart ####");
 
         CurrentGameState = GameState.GameStart;
-
-        // TODO : 시작창 UI
         UIManager.Instance.SelectPopup("playUI");
-
-        // 게임 시작
-        inGameController.InGameStart();
-
         SoundManager.Instance.PlayBGM(SoundManager.Instance.playBGM);
+        inGameController.InGameStart();
     }
 
 
     // State : 게임 종료
     public void GameOverState()
     {
-        Debug.Log("#### GameOver ####");
+        //Debug.Log("#### GameOver ####");
 
         CurrentGameState = GameState.GameOver;
-
-        SoundManager.Instance.PlaySoundOnce(SoundManager.Instance.gameOverSound);
-
-        inGameController.GameOver();
-
-        // TODO : 게임 종료 UI 열기
         UIManager.Instance.SelectPopup("gameOverUI");
+        SoundManager.Instance.PlaySoundOnce(SoundManager.Instance.gameOverSound);
+        inGameController.GameOver();
     }
     public void GameOver()
     {
@@ -191,15 +155,19 @@ public class GameManager : MonoBehaviour
 
     public void ResetGame()
     {
-        Debug.Log("씬 다시 로드");
-        string currentSceneName = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(currentSceneName);
+        inGameController.InitializeInGameController();
+        IntroState();
+
+        //string currentSceneName = SceneManager.GetActiveScene().name;
+        //SceneManager.LoadScene(currentSceneName);
     }
 
     public void RestartGame()
     {
-        Debug.Log("게임 다시 시작");
-        CurrentGameState = GameState.GameStart;
-        ResetGame();
+        inGameController.InitializeInGameController();
+        GameStartState();
+
+        //CurrentGameState = GameState.GameStart;
+        //ResetGame();
     }
 }
