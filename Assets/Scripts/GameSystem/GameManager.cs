@@ -43,13 +43,6 @@ public class GameManager : MonoBehaviour
     public GameObject[] playerPrefab;
     public InputActionAsset[] playerInputAsset;
 
-    //
-    //public GameObject player1Prefab;
-    //public GameObject player2Prefab;
-    //public InputActionAsset player1InputAsset;
-    //public InputActionAsset player2InputAsset;
-    //
-
     public delegate void GameOverHandler();
     public event GameOverHandler OnGameOver;
 
