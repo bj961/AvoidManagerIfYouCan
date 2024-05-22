@@ -248,7 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d5fde8c4bf4dc44d824241dd7c13835, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthChangeDelay: 0.5
+  healthChangeDelay: 1
 --- !u!114 &2554999415436735397
 MonoBehaviour:
   m_ObjectHideFlags: 0
