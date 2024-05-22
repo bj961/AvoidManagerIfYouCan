@@ -124,7 +124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2172463495243166705}
   - component: {fileID: 422327719847653245}
-  - component: {fileID: 943498341111256219}
+  - component: {fileID: 5404263503475793924}
   m_Layer: 5
   m_Name: StaminaBar
   m_TagString: Untagged
@@ -205,7 +205,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &943498341111256219
+--- !u!114 &5404263503475793924
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1300,7 +1300,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6488694215236160995}
   - component: {fileID: 8277585766041851}
-  - component: {fileID: 8610861709288834273}
+  - component: {fileID: 6054218611055566664}
   m_Layer: 5
   m_Name: HPBar
   m_TagString: Untagged
@@ -1381,7 +1381,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &8610861709288834273
+--- !u!114 &6054218611055566664
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

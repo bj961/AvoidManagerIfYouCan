@@ -9,7 +9,6 @@ public class CharacterSelectUI : MonoBehaviour
     [SerializeField] private List<Button> selectedButtons = new List<Button>();
     private int maxSelectedButtons = 2;
 
-    //[SerializeField] GameObject[] selectedCharacterPrefab;
     [SerializeField] private List<GameObject> selectedCharacterPrefab = new List<GameObject>();
 
     void Start()
@@ -28,8 +27,6 @@ public class CharacterSelectUI : MonoBehaviour
         {
             button.onClick.AddListener(() => OnButtonClick(button));
         }
-
-        //selectedCharacterPrefab = new GameObject[maxSelectedButtons];
 
         startGameButton.onClick.AddListener(OnStartGameButtonClick); 
     }
