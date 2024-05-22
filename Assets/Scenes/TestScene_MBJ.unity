@@ -1732,6 +1732,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f9ed37be7ce5a4a859661ee92191cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player1Input:
+    m_Name: Player 1 Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a1445523-369c-4ecb-bc5d-0cf66aa34465
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  Player2Input:
+    m_Name: Player 2 Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: fd97681c-9b05-45ea-9216-50142460234c
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   inGameController: {fileID: 0}
   player1Prefab: {fileID: 8838635103511040559, guid: 614e2f8fbc3ed4045876e95215038060, type: 3}
   player2Prefab: {fileID: 8824794042782500437, guid: e77abdd1ead4461479ac236668f00f98, type: 3}

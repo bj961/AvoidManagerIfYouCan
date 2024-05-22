@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
 using System.Xml.Linq;
+using UnityEngine.InputSystem;
 
 
 public enum GameState
@@ -28,23 +29,22 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    public InGameController inGameController;
 
     public GameState CurrentGameState { get; private set; }
     public GameMode CurrentGameMode { get; set; }
 
-   
-
+    
     public void SetGameMode(GameMode newGameMode)
     {
         CurrentGameMode = newGameMode;
     }
 
-
-    public InGameController inGameController;
-
-    // 캐릭터 프리팹
     public GameObject player1Prefab;
     public GameObject player2Prefab;
+
+    public GameObject player1Input;
+    public GameObject player2Input;
 
     public delegate void GameOverHandler();
     public event GameOverHandler OnGameOver;
@@ -100,26 +100,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //InitializeGameManager();
-
-
-        //inGameController = FindObjectOfType<InGameController>();
-
-        //Debug.Log("## GameMangaer Start() ##\n" + CurrentGameState.ToString());
-
-        //// TODO : state를 이벤트 기반으로 변경한다면 이 코드도 수정할 것
-        //if(CurrentGameState == GameState.Intro)
-        //{
-        //    IntroState();
-        //}
-        //if (CurrentGameState == GameState.GameStart)
-        //{
-        //    GameStartState();
-        //}
-        //else
-        //{
-        //    CurrentGameState = GameState.Intro;
-        //    IntroState();
-        //}
     }
 
 
