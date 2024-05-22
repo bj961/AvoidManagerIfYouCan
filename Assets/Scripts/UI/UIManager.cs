@@ -12,7 +12,8 @@ public class UIManager : MonoBehaviour
 
     public GameObject introUI;
     public GameObject playUI;
-    public GameObject selectCharUI;
+    public GameObject singleCharSelectUI;
+    public GameObject multiCharSelectUI;
     public GameObject gameOverUI;
     public GameObject selectDifficultyUI;
 
@@ -35,7 +36,8 @@ public class UIManager : MonoBehaviour
         {
             { "introUI", introUI },
             { "playUI", playUI },
-            { "selectCharUI", selectCharUI },
+            { "singleCharSelectUI", singleCharSelectUI },
+            { "multiCharSelectUI", multiCharSelectUI },
             { "gameOverUI", gameOverUI },
             { "selectDifficultyUI", selectDifficultyUI }
         };
