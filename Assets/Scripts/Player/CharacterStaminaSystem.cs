@@ -4,6 +4,7 @@ using UnityEngine;
 public class CharacterStaminaSystem : MonoBehaviour
 {
     private CharacterStatHandler characterStatHandler;
+    [SerializeField] private SPBar staminaBar;
 
     // get만 구현된 것처럼 프로퍼티를 사용하는 것
     // 이렇게 하면 데이터의 복제본이 여기저기 돌아다니다가 싱크가 깨지는 문제를 막을 수 있어요!
@@ -27,6 +28,7 @@ public class CharacterStaminaSystem : MonoBehaviour
     private void Start()
     {
         currentStamina = MaxStamina;
+        staminaBar.SetMaxStamina(currentStamina);
     }
 
     public bool ChangeStamina()
@@ -39,6 +41,7 @@ public class CharacterStaminaSystem : MonoBehaviour
             currentStamina = currentStamina - staminaConsumeRate * Time.deltaTime;
             //isConsumeStamina = true;
             //Debug.Log(currentStamina);
+            staminaBar.SetStamina(currentStamina);
         }
         return true;
     }
@@ -52,6 +55,7 @@ public class CharacterStaminaSystem : MonoBehaviour
             currentStamina += staminaRecoveryRate * Time.deltaTime;
             //isConsumeStamina = false;
             //Debug.Log(currentStamina);
+            staminaBar.SetStamina(currentStamina);
         }
         return true;
     }
