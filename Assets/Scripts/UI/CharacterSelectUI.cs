@@ -2,15 +2,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ButtonManager : MonoBehaviour
+public class CharacterSelectUI : MonoBehaviour
 {
     public List<Button> buttons;
     public Button startGameButton; 
-    private List<Button> selectedButtons = new List<Button>();
+    [SerializeField] private List<Button> selectedButtons = new List<Button>();
     private int maxSelectedButtons = 2;
 
-    GameObject selectedCharacterPrefab1;
-    GameObject selectedCharacterPrefab2;
+    //[SerializeField] GameObject[] selectedCharacterPrefab;
+    [SerializeField] private List<GameObject> selectedCharacterPrefab = new List<GameObject>();
 
     void Start()
     {
@@ -29,6 +29,8 @@ public class ButtonManager : MonoBehaviour
             button.onClick.AddListener(() => OnButtonClick(button));
         }
 
+        //selectedCharacterPrefab = new GameObject[maxSelectedButtons];
+
         startGameButton.onClick.AddListener(OnStartGameButtonClick); 
     }
 
@@ -37,6 +39,7 @@ public class ButtonManager : MonoBehaviour
         if (selectedButtons.Contains(clickedButton))
         {
             selectedButtons.Remove(clickedButton);
+            selectedCharacterPrefab.Remove(clickedButton.GetComponent<CharacterSelectButton>().characterPrefab);
             clickedButton.GetComponent<Image>().color = Color.white;
         }
         else
@@ -44,6 +47,7 @@ public class ButtonManager : MonoBehaviour
             if (selectedButtons.Count < maxSelectedButtons)
             {
                 selectedButtons.Add(clickedButton);
+                selectedCharacterPrefab.Add(clickedButton.GetComponent<CharacterSelectButton>().characterPrefab);
                 UpdateButtonColors();
             }
         }
@@ -67,7 +71,11 @@ public class ButtonManager : MonoBehaviour
 
     private void OnStartGameButtonClick()
     {
-        // TODO: UI 교체
-        Debug.Log("게임창으로 UI 교체 활성화");
+        for (int i = 0; i < maxSelectedButtons; i++)
+        {
+            GameManager.Instance.playerPrefab[i] = selectedCharacterPrefab[i];
+        }
+
+        GameManager.Instance.GameStartState();
     }
 }
