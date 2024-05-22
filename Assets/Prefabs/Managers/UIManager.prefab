@@ -48,5 +48,5 @@ MonoBehaviour:
   playUI: {fileID: 259905100611643859, guid: 843cbb4fd9963a04c8d501e3f18ee9ea, type: 3}
   singleCharSelectUI: {fileID: 5242043967033543492, guid: 2d3c237297526d246af6621b6a176ca5, type: 3}
   multiCharSelectUI: {fileID: 1899194228217991988, guid: aadcc312bc1a495499281bdbaf837058, type: 3}
-  gameOverUI: {fileID: 4434675628154522884, guid: 1efc002a4f600f24dbc086638679348d, type: 3}
+  gameOverUI: {fileID: 4865150190927968231, guid: 2491d6f0ab4c4184a85af84ac14a7a36, type: 3}
   selectDifficultyUI: {fileID: 0}
