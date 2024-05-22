@@ -150,7 +150,7 @@ Transform:
   m_GameObject: {fileID: 93015466}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.951, y: -0.047, z: -0.05280562}
+  m_LocalPosition: {x: -3.33, y: -0.16, z: -0.05280562}
   m_LocalScale: {x: 0.44145775, y: 5.7715, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -771,11 +771,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60547ca77c9a70a4cb9d6c7336813217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IntroUI: {fileID: 0}
-  PlayUI: {fileID: 0}
-  SelectCharUI: {fileID: 0}
-  GameOverUI: {fileID: 0}
-  UIArray: []
+  introUI: {fileID: 0}
+  playUI: {fileID: 0}
+  selectCharUI: {fileID: 0}
+  gameOverUI: {fileID: 0}
+  selectDifficultyUI: {fileID: 0}
 --- !u!4 &685130882
 Transform:
   m_ObjectHideFlags: 0
@@ -915,8 +915,8 @@ Transform:
   m_GameObject: {fileID: 1309571811}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.27, y: -3.48, z: -0.05280562}
-  m_LocalScale: {x: 6.2352934, y: 1, z: 1}
+  m_LocalPosition: {x: 0.2259, y: -3.47, z: 0}
+  m_LocalScale: {x: 6.7833757, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 483800505}
@@ -948,7 +948,7 @@ Transform:
   m_GameObject: {fileID: 1357213811}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.5, y: -0.07, z: -0.05280562}
+  m_LocalPosition: {x: 3.825, y: -0.093, z: -0.05280562}
   m_LocalScale: {x: 0.44145775, y: 5.7715, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1139,7 +1139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inGameController: {fileID: 0}
   player1Prefab: {fileID: 8838635103511040559, guid: 614e2f8fbc3ed4045876e95215038060, type: 3}
-  player2Prefab: {fileID: 2051234154461792849, guid: d3b0e0ed174922746a14deb43472660e, type: 3}
+  player2Prefab: {fileID: 0}
 --- !u!4 &1482434848
 Transform:
   m_ObjectHideFlags: 0

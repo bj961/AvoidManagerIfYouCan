@@ -81,10 +81,6 @@ public class GameManager : MonoBehaviour
         {
             GameStartState();
         }
-        else if(CurrentGameState == GameState.GameOver)
-        {
-            GameOverState();
-        }
         else
         {
             CurrentGameState = GameState.Intro;
