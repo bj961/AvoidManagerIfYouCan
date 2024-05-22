@@ -33,6 +33,11 @@ public class CharacterOnDeath : MonoBehaviour
         {
             behaviour.enabled = false; // 가져온 걸 다 비활성화
         }
+
+        // 2초뒤에 파괴
+        Destroy(gameObject, 2f);
+
+        GameManager.Instance.inGameController.PlayerDead();
     }
 
 
