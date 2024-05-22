@@ -65,6 +65,13 @@ public class InGameController : MonoBehaviour
         }
     }
 
+    internal void InGameStart()
+    {
+        // 플레이어 캐릭터 생성
+        CreatePlayer();
+
+        Time.timeScale = 1;
+    }
 
 
     void CreatePlayer()
@@ -88,21 +95,12 @@ public class InGameController : MonoBehaviour
     }
 
 
-    internal void InGameStart()
-    {
-        // 플레이어 캐릭터 생성
-        CreatePlayer();
-
-        Time.timeScale = 1;
-    }
-
-
     public void GameOver()
     {
-        DestroyEnemyObjects();
+        //DestroyEnemyObjects();
 
         // 시간 정지
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
 
         // 최고 점수 계산
         if (currentTime > highScore)
@@ -133,6 +131,8 @@ public class InGameController : MonoBehaviour
     {
         // TODO : 부활 아이템 등을 넣을거라면 1P 2P 누가 살아있는지 체크도 해야 함
         alivePlayers--;
+
+        Debug.Log("PlayerDead() 호출! alivePlayers : " + alivePlayers);
 
         if (alivePlayers == 0)
         {
