@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     public GameState CurrentGameState { get; private set; }
     public GameMode CurrentGameMode { get; set; }
 
-    
+
     public void SetGameMode(GameMode newGameMode)
     {
         CurrentGameMode = newGameMode;
@@ -52,28 +52,51 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            CurrentGameState = GameState.Intro;
+
+            OnGameOver += GameOverState;
 
             Application.targetFrameRate = 60;
-            inGameController = FindObjectOfType<InGameController>();
+
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
         }
+
+        InitializeGameManager();
     }
 
 
+    void InitializeGameManager()
+    {
+        Debug.Log("## GameManager Start() ##\n" + CurrentGameState.ToString());
+
+        inGameController = FindObjectOfType<InGameController>();
+
+        InitSelectedCharacter();
+
+        // TODO : state를 이벤트 기반으로 변경한다면 이 코드도 수정할 것
+        if (CurrentGameState == GameState.Intro)
+        {
+            IntroState();
+        }
+        if (CurrentGameState == GameState.GameStart)
+        {
+            GameStartState();
+        }
+        else
+        {
+            CurrentGameState = GameState.Intro;
+            IntroState();
+        }
+    }
 
     void Start()
     {
-        inGameController = FindObjectOfType<InGameController>();
         playerPrefab = new GameObject[2];
         playerInputAsset = new InputActionAsset[2];
-        OnGameOver += GameOverState;
-
-        CurrentGameState = GameState.Intro;
-        IntroState(); 
     }
 
 
@@ -81,14 +104,18 @@ public class GameManager : MonoBehaviour
     public void IntroState()
     {
         CurrentGameState = GameState.Intro;
-        InitSelectedCharacter();
+
+
+        //StageManager.Instance.SetDifficulty(0);
+
         UIManager.Instance.SelectPopup("introUI");
+
         SoundManager.Instance.PlayBGM(SoundManager.Instance.introBGM);
     }
 
     void InitSelectedCharacter()
     {
-        for(int i=0;i<playerPrefab.Length;i++)
+        for (int i = 0; i < playerPrefab.Length; i++)
         {
             playerPrefab[i] = null;
         }
