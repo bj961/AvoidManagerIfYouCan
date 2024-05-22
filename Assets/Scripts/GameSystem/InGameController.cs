@@ -16,37 +16,26 @@ public class InGameController : MonoBehaviour
     private GameObject[] players;
     private int alivePlayers;
 
-    // TODO : 혹시 부활 기능 구현할 거라면 사용할 필드
-    // player에서 가지고 있는게 나을듯
-    private bool isPlayer1Alive;
-    private bool isPlayer2Alive;
-
-
-    // 갱신할 UI들
-    // 인스펙터에서 연결 해야함
     public Text currentScoreText;
     public Text highScoreText;
     public Text endCurrentScoreText;
     public Text endHighScoreText;
 
-    // 경과 시간 = 점수
     private float currentTime;
     private float highScore;
+
     public float GetScore() { return currentTime; }
     public float GetHighScore() { return highScore; }
 
 
 
 
-    // 게임 초기화
     void Start()
     {
         players = new GameObject[2];
 
-        //게임 초기화
         InitializeInGameController();
 
-        // UI 연결
         currentScoreText.text = currentTime.ToString("N3");
         highScoreText.text = highScore.ToString("N3");
 
@@ -81,7 +70,6 @@ public class InGameController : MonoBehaviour
 
     public void InGameStart()
     {
-        // 플레이어 캐릭터 생성
         CreatePlayer();
 
         Debug.Log("## InGameStart() ##\nalivePlayers : " + alivePlayers);
@@ -109,8 +97,6 @@ public class InGameController : MonoBehaviour
 
     public void GameOver()
     {
-
-        // 최고 점수 계산
         if (currentTime > highScore)
         {
             highScore = currentTime;
@@ -124,10 +110,9 @@ public class InGameController : MonoBehaviour
     }
 
 
-    // TODO : 이벤트로 플레이어 사망시 호출되도록 구현
+    // 이벤트로 플레이어 사망시 호출
     public void PlayerDead()
     {
-        // TODO : 부활 아이템 등을 넣을거라면 1P 2P 누가 살아있는지 체크도 해야 함
         alivePlayers--;
 
         Debug.Log("PlayerDead() 호출! alivePlayers : " + alivePlayers);
