@@ -6,8 +6,8 @@ public class CharacterStaminaSystem : MonoBehaviour
     private CharacterStatHandler characterStatHandler;
     [SerializeField] private SPBar staminaBar;
 
-    // getë§Œ êµ¬í˜„ëœ ê²ƒì²˜ëŸ¼ í”„ë¡œí¼í‹°ë¥¼ ì‚¬ìš©í•˜ëŠ” ê²ƒ
-    // ì´ë ‡ê²Œ í•˜ë©´ ë°ì´í„°ì˜ ë³µì œë³¸ì´ ì—¬ê¸°ì €ê¸° ëŒì•„ë‹¤ë‹ˆë‹¤ê°€ ì‹±í¬ê°€ ê¹¨ì§€ëŠ” ë¬¸ì œë¥¼ ë§‰ì„ ìˆ˜ ìˆì–´ìš”!
+    // get¸¸ ±¸ÇöµÈ °ÍÃ³·³ ÇÁ·ÎÆÛÆ¼¸¦ »ç¿ëÇÏ´Â °Í
+    // ÀÌ·¸°Ô ÇÏ¸é µ¥ÀÌÅÍÀÇ º¹Á¦º»ÀÌ ¿©±âÀú±â µ¹¾Æ´Ù´Ï´Ù°¡ ½ÌÅ©°¡ ±úÁö´Â ¹®Á¦¸¦ ¸·À» ¼ö ÀÖ¾î¿ä!
     public float MaxStamina => characterStatHandler.currentStats.maxStamina;
     public float currentStamina {  get; private set; }
 
@@ -17,7 +17,9 @@ public class CharacterStaminaSystem : MonoBehaviour
     //private bool isConsumeStamina = false;
 
     //public event Action OnSprint;
-    //public event Action OnSprintEnd; // TODO : ì• ë‹ˆë©”ì´ì…˜ ì—°ê²°í•´ì¤„ ë•Œ ì‚¬ìš©í•´ì¤˜ì•¼ í•œë‹¤.
+    //public event Action OnSprintEnd; // TODO : ¾Ö´Ï¸ŞÀÌ¼Ç ¿¬°áÇØÁÙ ¶§ »ç¿ëÇØÁà¾ß ÇÑ´Ù.
+
+    bool isPlayer1 = false; // hp¹Ù ui´Â 1°³¹Û¿¡ ±¸Çö ¾ÈµÇ¾î ÀÖÀ¸¹Ç·Î
 
 
     private void Awake()
@@ -28,12 +30,24 @@ public class CharacterStaminaSystem : MonoBehaviour
     private void Start()
     {
         currentStamina = MaxStamina;
-        staminaBar.SetMaxStamina(currentStamina);
+
+        if (gameObject == GameManager.Instance.inGameController.GetPlayers()[0])
+        {
+            isPlayer1 = true;
+        }
+
+        if (isPlayer1)
+        {
+            staminaBar = GameObject.Find("StaminaBar").GetComponent<SPBar>();
+            staminaBar.SetMaxStamina(currentStamina);
+        }
+
+        
     }
 
     public bool ChangeStamina()
     {
-        // ë²”ìœ„ì— ì œí•œì„ ì£¼ê¸°ìœ„í•œ êµ¬ë¬¸
+        // ¹üÀ§¿¡ Á¦ÇÑÀ» ÁÖ±âÀ§ÇÑ ±¸¹®
         currentStamina = Mathf.Clamp(currentStamina, 0, MaxStamina);
 
         if (currentStamina > 0.0f)
@@ -41,7 +55,10 @@ public class CharacterStaminaSystem : MonoBehaviour
             currentStamina = currentStamina - staminaConsumeRate * Time.deltaTime;
             //isConsumeStamina = true;
             //Debug.Log(currentStamina);
-            staminaBar.SetStamina(currentStamina);
+            if (isPlayer1)
+            {
+                staminaBar.SetStamina(currentStamina);
+            }
         }
         return true;
     }
@@ -55,7 +72,10 @@ public class CharacterStaminaSystem : MonoBehaviour
             currentStamina += staminaRecoveryRate * Time.deltaTime;
             //isConsumeStamina = false;
             //Debug.Log(currentStamina);
-            staminaBar.SetStamina(currentStamina);
+            if (isPlayer1)
+            {
+                staminaBar.SetStamina(currentStamina);
+            }
         }
         return true;
     }

@@ -15,13 +15,15 @@ public class CharacterHealtSystem : MonoBehaviour
     private bool isBump = false;
 
     public event Action OnDamage;
-    public event Action OnHeal; // ì•„ì§ íšŒë³µë ì§€ë§ì§€ ë¯¸ì •
+    public event Action OnHeal; // ¾ÆÁ÷ È¸º¹µÉÁö¸»Áö ¹ÌÁ¤
     public event Action OnDeath;
     public event Action OnInvinsibilityEnd;
 
-    public float CurrentHealth {  get; private set; }
+    public float CurrentHealth { get; private set; }
 
     public float MaxHealth => characterStatHandler.currentStats.maxHealth;
+
+    bool isPlayer1 = false; // hp¹Ù ui´Â 1°³¹Û¿¡ ±¸Çö ¾ÈµÇ¾î ÀÖÀ¸¹Ç·Î
 
     private void Awake()
     {
@@ -30,17 +32,26 @@ public class CharacterHealtSystem : MonoBehaviour
     private void Start()
     {
         CurrentHealth = characterStatHandler.currentStats.maxHealth;
-        healthBar.SetMaxHealth(CurrentHealth);
+        if (gameObject == GameManager.Instance.inGameController.GetPlayers()[0])
+        {
+            isPlayer1 = true;
+        }
+
+        if (isPlayer1)
+        {
+            healthBar = GameObject.Find("HPBar").GetComponent<HPBar>();
+            healthBar.SetMaxHealth(CurrentHealth);
+        }
     }
 
     private void Update()
     {
-        if(isBump&&timeSinceLastChange < healthChangeDelay)
+        if (isBump && timeSinceLastChange < healthChangeDelay)
         {
             timeSinceLastChange += Time.deltaTime;
-            if(timeSinceLastChange >= healthChangeDelay)
+            if (timeSinceLastChange >= healthChangeDelay)
             {
-                OnInvinsibilityEnd?.Invoke(); // ìˆìœ¼ë©´ ì‹¤í–‰
+                OnInvinsibilityEnd?.Invoke(); // ÀÖÀ¸¸é ½ÇÇà
                 isBump = false;
             }
         }
@@ -48,7 +59,7 @@ public class CharacterHealtSystem : MonoBehaviour
 
     public bool ChangeHealth(float change)
     {
-        // ë¬´ì  ì‹œê°„ì—ëŠ” ì²´ë ¥ ë‹³ì§€ ì•Šê²Œ
+        // ¹«Àû ½Ã°£¿¡´Â Ã¼·Â ´âÁö ¾Ê°Ô
         if (timeSinceLastChange < healthChangeDelay)
         {
             return false;
@@ -57,9 +68,12 @@ public class CharacterHealtSystem : MonoBehaviour
         timeSinceLastChange = 0;
         CurrentHealth += change;
         CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
-        Debug.Log("ì¶©ëŒ "+CurrentHealth);
+        Debug.Log("Ãæµ¹ " + CurrentHealth);
 
-        healthBar.SetHealth(CurrentHealth);
+        if (isPlayer1)
+        {
+            healthBar.SetHealth(CurrentHealth);
+        }
 
         if (CurrentHealth <= 0.0f)
         {
@@ -67,9 +81,9 @@ public class CharacterHealtSystem : MonoBehaviour
             return true;
         }
 
-        if(change >= 0)
+        if (change >= 0)
         {
-            OnHeal?.Invoke(); // ì•„ì§ íšŒë³µë ì§€ë§ì§€ ë¯¸ì • ì¡´ì¬ ì—†ìŒ
+            OnHeal?.Invoke(); // ¾ÆÁ÷ È¸º¹µÉÁö¸»Áö ¹ÌÁ¤ Á¸Àç ¾øÀ½
         }
         else
         {
