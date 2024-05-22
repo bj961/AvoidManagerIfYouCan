@@ -23,12 +23,13 @@ public class SoundManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        audioSource = GetComponent<AudioSource>();
     }
 
     void Start()
     {
-
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = introBGM;
+        audioSource.Play();
     }
 
     public void ChangeBGM(AudioClip audioClip)
