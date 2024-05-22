@@ -7,6 +7,7 @@ using UnityEngine;
 public class CharacterHealtSystem : MonoBehaviour
 {
     private CharacterStatHandler characterStatHandler;
+    [SerializeField] private HpSlider healthslider;
 
     [SerializeField] private float healthChangeDelay = 0.5f;
     private float timeSinceLastChange = float.MaxValue;
@@ -29,6 +30,7 @@ public class CharacterHealtSystem : MonoBehaviour
     private void Start()
     {
         CurrentHealth = characterStatHandler.currentStats.maxHealth;
+        healthslider.SetMaxHealth(MaxHealth);
     }
 
     private void Update()
@@ -57,6 +59,7 @@ public class CharacterHealtSystem : MonoBehaviour
         CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
         Debug.Log("충돌 "+CurrentHealth);
 
+        healthslider.SetMaxHealth(CurrentHealth);
 
         if (CurrentHealth <= 0.0f)
         {
