@@ -1757,7 +1757,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inGameController: {fileID: 0}
   player1Prefab: {fileID: 8838635103511040559, guid: 614e2f8fbc3ed4045876e95215038060, type: 3}
-  player2Prefab: {fileID: 0}
+  player2Prefab: {fileID: 2051234154461792849, guid: d3b0e0ed174922746a14deb43472660e, type: 3}
 --- !u!4 &1482434848
 Transform:
   m_ObjectHideFlags: 0

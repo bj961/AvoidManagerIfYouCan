@@ -91,8 +91,9 @@ GameObject:
   - component: {fileID: 6637246126955558207}
   - component: {fileID: 543439029011126130}
   - component: {fileID: 5976602930813734995}
+  - component: {fileID: 719849573916437424}
   m_Layer: 5
-  m_Name: RetryButton (1)
+  m_Name: MainMenuButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -199,7 +200,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 543439029011126130}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 719849573916437424}
+        m_TargetAssemblyTypeName: UIButton, Assembly-CSharp
+        m_MethodName: MainMenuButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &719849573916437424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 626948137884092248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2729d5fedcd808949be883f8ed06fce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &827169458975329369
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,7 +473,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7853702217469014685
 RectTransform:
   m_ObjectHideFlags: 0
@@ -724,6 +749,7 @@ GameObject:
   - component: {fileID: 1147726498205096441}
   - component: {fileID: 2053796047788263360}
   - component: {fileID: 6388685974666030074}
+  - component: {fileID: 1777645781986643907}
   m_Layer: 5
   m_Name: RetryButton
   m_TagString: Untagged
@@ -832,4 +858,28 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2053796047788263360}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1777645781986643907}
+        m_TargetAssemblyTypeName: UIButton, Assembly-CSharp
+        m_MethodName: RetryButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1777645781986643907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7784686214313188359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2729d5fedcd808949be883f8ed06fce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
