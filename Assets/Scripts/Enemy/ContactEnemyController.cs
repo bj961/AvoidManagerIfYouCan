@@ -34,6 +34,7 @@ public class ContactEnemyController : MonoBehaviour
             if(gameObject.CompareTag(myTag))
             {
                 characterHealtSystem.ChangeHealth(-enemyDamage);
+                Destroy(this.gameObject);
             }
         }
     }
