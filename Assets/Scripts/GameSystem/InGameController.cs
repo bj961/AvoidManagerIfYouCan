@@ -27,7 +27,8 @@ public class InGameController : MonoBehaviour
     // 인스펙터에서 연결 해야함
     public Text currentScoreText;
     public Text highScoreText;
-
+    public Text endCurrentScoreText;
+    public Text endHighScoreText;
 
     // 경과 시간 = 점수
     private float currentTime;
@@ -70,12 +71,19 @@ public class InGameController : MonoBehaviour
     {
         Vector3 player1StartPosition = new Vector3(0f, -4.2f, 0);
         Vector3 player2StartPosition = new Vector3(1.4f, -4.2f, 0);
-        player1 = Instantiate(GameManager.Instance.player1Prefab, player1StartPosition, Quaternion.identity);
-        alivePlayers = 1;
+        if (GameManager.Instance.player1Prefab != null)
+        {
+            player1 = Instantiate(GameManager.Instance.player1Prefab, player1StartPosition, Quaternion.identity);
+            alivePlayers = 1;
+        }
+
         if (GameManager.Instance.CurrentGameMode == GameMode.MultiPlayer)
         {
-            player2 = Instantiate(GameManager.Instance.player2Prefab, player2StartPosition, Quaternion.identity);
-            alivePlayers++;
+            if (GameManager.Instance.player2Prefab != null)
+            {
+                player2 = Instantiate(GameManager.Instance.player2Prefab, player2StartPosition, Quaternion.identity);
+                alivePlayers++;
+            }
         }
     }
 
@@ -89,10 +97,9 @@ public class InGameController : MonoBehaviour
     }
 
 
-
     public void GameOver()
     {
-        Debug.Log("#### GameOver ####");
+        DestroyEnemyObjects();
 
         // 시간 정지
         Time.timeScale = 0f;
@@ -103,7 +110,21 @@ public class InGameController : MonoBehaviour
             highScore = currentTime;
             highScoreText.text = highScore.ToString("N3");
         }
+
+        endCurrentScoreText.text = currentTime.ToString("N3");
+        endHighScoreText.text = highScore.ToString("N3");
+
         SaveHighScore();
+    }
+
+    void DestroyEnemyObjects()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (GameObject enemy in enemies)
+        {
+            Destroy(enemy);
+        }
     }
 
 

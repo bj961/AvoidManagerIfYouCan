@@ -15,7 +15,10 @@ public class StageManager : MonoBehaviour
 
     private void Update()
     {
-        MakeEnemy();
+        if (GameManager.Instance.CurrentGameState == GameState.GameStart)
+        {
+            MakeEnemy();
+        }
     }
 
     // Update is called once per frame
