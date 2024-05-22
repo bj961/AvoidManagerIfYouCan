@@ -40,11 +40,15 @@ public class GameManager : MonoBehaviour
         CurrentGameMode = newGameMode;
     }
 
-    public GameObject player1Prefab;
-    public GameObject player2Prefab;
+    public GameObject[] playerPrefab;
+    public InputActionAsset[] playerInputAsset;
 
-    public GameObject player1Input;
-    public GameObject player2Input;
+    //
+    //public GameObject player1Prefab;
+    //public GameObject player2Prefab;
+    //public InputActionAsset player1InputAsset;
+    //public InputActionAsset player2InputAsset;
+    //
 
     public delegate void GameOverHandler();
     public event GameOverHandler OnGameOver;
@@ -72,15 +76,14 @@ public class GameManager : MonoBehaviour
     }
 
 
-    // TODO : 게임 다시 시작 시 문제 발생하여
-    // Awake() Start() 위치 문제인지 확인 위해 임시로 만든 함수
-    // 나중에 없애고 위치 이동
     void InitializeGameManager()
     {
+        Debug.Log("## GameManager Start() ##\n" + CurrentGameState.ToString());
+
         inGameController = FindObjectOfType<InGameController>();
 
-        Debug.Log("## GameMangaer Start() ##\n" + CurrentGameState.ToString());
-
+        InitSelectedCharacter();
+        
         // TODO : state를 이벤트 기반으로 변경한다면 이 코드도 수정할 것
         if (CurrentGameState == GameState.Intro)
         {
@@ -99,7 +102,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        //InitializeGameManager();
+        playerPrefab = new GameObject[2];
+        playerInputAsset = new InputActionAsset[2];
     }
 
 
@@ -108,8 +112,7 @@ public class GameManager : MonoBehaviour
     {
         CurrentGameState = GameState.Intro;
 
-        // 테스트 위해 잠시 꺼둠
-        //InitSelectedCharacter();
+        
         //StageManager.Instance.SetDifficulty(0);
 
         UIManager.Instance.SelectPopup("introUI");
@@ -119,8 +122,10 @@ public class GameManager : MonoBehaviour
 
     void InitSelectedCharacter()
     {
-        player1Prefab = null;
-        player2Prefab = null;
+        for(int i=0;i<playerPrefab.Length;i++)
+        {
+            playerPrefab[i] = null;
+        }
     }
 
 

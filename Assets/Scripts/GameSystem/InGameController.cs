@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -12,8 +13,10 @@ public class InGameController : MonoBehaviour
 {
     public static InGameController Instance;
 
-    private GameObject player1;
-    private GameObject player2;
+    private GameObject[] player;
+
+    //private GameObject player1;
+    //private GameObject player2;
 
     private int alivePlayers;
 
@@ -42,6 +45,8 @@ public class InGameController : MonoBehaviour
     // 게임 초기화
     void Start()
     {
+        player = new GameObject[2];
+
         //게임 초기화
         currentTime = 0;
         LoadHighScore();
@@ -78,31 +83,50 @@ public class InGameController : MonoBehaviour
 
     void CreatePlayer()
     {
-        Vector3 player1StartPosition = new Vector3(0f, -4.2f, 0);
-        Vector3 player2StartPosition = new Vector3(1.4f, -4.2f, 0);
-        if (GameManager.Instance.player1Prefab != null)
-        {
-            player1 = Instantiate(GameManager.Instance.player1Prefab, player1StartPosition, Quaternion.identity);
-            alivePlayers = 1;
-        }
+        Vector3[] playerStartPosition = new Vector3[2] { new Vector3(0f, -4.2f, 0), new Vector3(1.4f, -4.2f, 0)};
 
-        if (GameManager.Instance.CurrentGameMode == GameMode.MultiPlayer)
+        for(int i = 0; i <= (int)GameManager.Instance.CurrentGameMode; i++)
         {
-            if (GameManager.Instance.player2Prefab != null)
+            if (GameManager.Instance.playerPrefab[i] != null)
             {
-                player2 = Instantiate(GameManager.Instance.player2Prefab, player2StartPosition, Quaternion.identity);
-                alivePlayers++;
+                player[i] = Instantiate(GameManager.Instance.playerPrefab[i], playerStartPosition[i], Quaternion.identity);
+                alivePlayers = i + 1;
+                PlayerInput playerInput = player[i].GetComponent<PlayerInput>();
+                playerInput.actions = GameManager.Instance.playerInputAsset[i];
             }
         }
+
+        ////
+        //Vector3 player1StartPosition = new Vector3(0f, -4.2f, 0);
+        //Vector3 player2StartPosition = new Vector3(1.4f, -4.2f, 0);
+        ////
+        //
+        //if (GameManager.Instance.player1Prefab != null)
+        //{
+        //    player1 = Instantiate(GameManager.Instance.player1Prefab, player1StartPosition, Quaternion.identity);
+        //    alivePlayers = 1;
+
+        //    PlayerInput player1Input = player1.GetComponent<PlayerInput>();
+        //    player1Input.actions = GameManager.Instance.player1InputAsset;
+        //}
+
+        //if (GameManager.Instance.CurrentGameMode == GameMode.MultiPlayer)
+        //{
+        //    if (GameManager.Instance.player2Prefab != null)
+        //    {
+        //        player2 = Instantiate(GameManager.Instance.player2Prefab, player2StartPosition, Quaternion.identity);
+        //        alivePlayers++;
+
+        //        PlayerInput player2Input = player2.GetComponent<PlayerInput>();
+        //        player2Input.actions = GameManager.Instance.player2InputAsset;
+        //    }
+        //}
+        //
     }
 
 
     public void GameOver()
     {
-        //DestroyEnemyObjects();
-
-        // 시간 정지
-        //Time.timeScale = 0f;
 
         // 최고 점수 계산
         if (currentTime > highScore)
@@ -115,16 +139,6 @@ public class InGameController : MonoBehaviour
         endHighScoreText.text = highScore.ToString("N3");
 
         SaveHighScore();
-    }
-
-    void DestroyEnemyObjects()
-    {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-        foreach (GameObject enemy in enemies)
-        {
-            Destroy(enemy);
-        }
     }
 
 
