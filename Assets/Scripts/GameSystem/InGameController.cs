@@ -119,7 +119,7 @@ public class InGameController : MonoBehaviour
 
         Debug.Log("PlayerDead() »£√‚! alivePlayers : " + alivePlayers);
 
-        if (alivePlayers == 0)
+        if (alivePlayers <= 0)
         {
             GameManager.Instance.GameOver();
         }
