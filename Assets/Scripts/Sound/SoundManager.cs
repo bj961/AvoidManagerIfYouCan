@@ -29,6 +29,7 @@ public class SoundManager : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        PlayBGM(introBGM);
     }
 
     public void ChangeBGM(AudioClip audioClip)

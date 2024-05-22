@@ -12,6 +12,12 @@ public class InGameController : MonoBehaviour
     public static InGameController Instance;
 
     private GameObject[] players;
+
+    public GameObject[] GetPlayers()
+    {
+        return players; ;
+    }
+
     private int alivePlayers;
 
     public Text currentScoreText;
