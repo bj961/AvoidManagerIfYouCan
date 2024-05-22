@@ -128,18 +128,14 @@ public class GameManager : MonoBehaviour
             case GameMode.MultiPlayer:
                 UIManager.Instance.SelectPopup("multiCharSelectUI");
                 break;
-        } 
+        }
     }
 
 
     // State : 난이도 선택(미구현)
     public void SelectDifficultyState()
     {
-        Debug.Log("#### Difficulty Select ####");
-
         CurrentGameState = GameState.SelectDifficulty;
-
-        // TODO : 난이도 선택 UI 열기
         //UIManager.Instance.SelectPopup("selectDifficultyUI");
     }
 

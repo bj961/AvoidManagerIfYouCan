@@ -19,9 +19,6 @@ public class CharacterStaminaSystem : MonoBehaviour
     //public event Action OnSprint;
     //public event Action OnSprintEnd; // TODO : 애니메이션 연결해줄 때 사용해줘야 한다.
 
-    bool isPlayer1 = false; // hp바 ui는 1개밖에 구현 안되어 있으므로
-
-
     private void Awake()
     {
         characterStatHandler = GetComponent<CharacterStatHandler>();
@@ -33,16 +30,14 @@ public class CharacterStaminaSystem : MonoBehaviour
 
         if (gameObject == GameManager.Instance.inGameController.GetPlayers()[0])
         {
-            isPlayer1 = true;
+            staminaBar = GameObject.Find("StaminaBar1").GetComponent<SPBar>();
         }
-
-        if (isPlayer1)
+        else if (gameObject == GameManager.Instance.inGameController.GetPlayers()[1])
         {
-            staminaBar = GameObject.Find("StaminaBar").GetComponent<SPBar>();
-            staminaBar.SetMaxStamina(currentStamina);
+            staminaBar = GameObject.Find("StaminaBar2").GetComponent<SPBar>();
         }
 
-
+        staminaBar.SetMaxStamina(currentStamina);
     }
 
     public bool ChangeStamina()
@@ -55,10 +50,8 @@ public class CharacterStaminaSystem : MonoBehaviour
             currentStamina = currentStamina - staminaConsumeRate * Time.deltaTime;
             //isConsumeStamina = true;
             //Debug.Log(currentStamina);
-            if (isPlayer1)
-            {
-                staminaBar.SetStamina(currentStamina);
-            }
+
+            staminaBar.SetStamina(currentStamina);
         }
         return true;
     }
@@ -72,10 +65,8 @@ public class CharacterStaminaSystem : MonoBehaviour
             currentStamina += staminaRecoveryRate * Time.deltaTime;
             //isConsumeStamina = false;
             //Debug.Log(currentStamina);
-            if (isPlayer1)
-            {
-                staminaBar.SetStamina(currentStamina);
-            }
+
+            staminaBar.SetStamina(currentStamina);
         }
         return true;
     }

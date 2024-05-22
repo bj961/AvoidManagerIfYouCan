@@ -5,11 +5,12 @@ using UnityEngine.UI;
 public class CharacterSelectUI : MonoBehaviour
 {
     public List<Button> buttons;
-    public Button startGameButton; 
+    public Button startGameButton;
+    [SerializeField] private List<GameObject> selectedCharacterPrefab = new List<GameObject>();
     [SerializeField] private List<Button> selectedButtons = new List<Button>();
     private int maxSelectedButtons = 2;
 
-    [SerializeField] private List<GameObject> selectedCharacterPrefab = new List<GameObject>();
+
 
     void Start()
     {
@@ -28,7 +29,7 @@ public class CharacterSelectUI : MonoBehaviour
             button.onClick.AddListener(() => OnButtonClick(button));
         }
 
-        startGameButton.onClick.AddListener(OnStartGameButtonClick); 
+        startGameButton.onClick.AddListener(OnStartGameButtonClick);
     }
 
     private void OnButtonClick(Button clickedButton)
@@ -66,12 +67,20 @@ public class CharacterSelectUI : MonoBehaviour
         }
     }
 
+
     private void OnStartGameButtonClick()
     {
         for (int i = 0; i < maxSelectedButtons; i++)
         {
             GameManager.Instance.playerPrefab[i] = selectedCharacterPrefab[i];
         }
+
+        for (int i = 0; i < selectedButtons.Count; i++)
+        {
+            selectedButtons[i].GetComponent<Image>().color = Color.white;
+        }
+        selectedButtons.Clear();
+        selectedCharacterPrefab.Clear();
 
         GameManager.Instance.GameStartState();
     }

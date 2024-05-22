@@ -23,8 +23,6 @@ public class CharacterHealtSystem : MonoBehaviour
 
     public float MaxHealth => characterStatHandler.currentStats.maxHealth;
 
-    bool isPlayer1 = false; // hp바 ui는 1개밖에 구현 안되어 있으므로
-
     private void Awake()
     {
         characterStatHandler = GetComponent<CharacterStatHandler>();
@@ -34,14 +32,13 @@ public class CharacterHealtSystem : MonoBehaviour
         CurrentHealth = characterStatHandler.currentStats.maxHealth;
         if (gameObject == GameManager.Instance.inGameController.GetPlayers()[0])
         {
-            isPlayer1 = true;
+            healthBar = GameObject.Find("HPBar1").GetComponent<HPBar>();
         }
-
-        if (isPlayer1)
+        else if (gameObject == GameManager.Instance.inGameController.GetPlayers()[1])
         {
-            healthBar = GameObject.Find("HPBar").GetComponent<HPBar>();
-            healthBar.SetMaxHealth(CurrentHealth);
+            healthBar = GameObject.Find("HPBar2").GetComponent<HPBar>();
         }
+        healthBar.SetMaxHealth(CurrentHealth);
     }
 
     private void Update()
@@ -69,11 +66,7 @@ public class CharacterHealtSystem : MonoBehaviour
         CurrentHealth += change;
         CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
         Debug.Log("충돌 " + CurrentHealth);
-
-        if (isPlayer1)
-        {
-            healthBar.SetHealth(CurrentHealth);
-        }
+        healthBar.SetHealth(CurrentHealth);
 
         if (CurrentHealth <= 0.0f)
         {

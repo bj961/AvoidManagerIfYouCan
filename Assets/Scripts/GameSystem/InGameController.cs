@@ -67,8 +67,6 @@ public class InGameController : MonoBehaviour
     public void InGameStart()
     {
         CreatePlayer();
-
-        Debug.Log("## InGameStart() ##\nalivePlayers : " + alivePlayers);
     }
 
 
