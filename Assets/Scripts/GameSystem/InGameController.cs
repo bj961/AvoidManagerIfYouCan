@@ -14,10 +14,6 @@ public class InGameController : MonoBehaviour
     public static InGameController Instance;
 
     private GameObject[] player;
-
-    //private GameObject player1;
-    //private GameObject player2;
-
     private int alivePlayers;
 
     // TODO : 혹시 부활 기능 구현할 거라면 사용할 필드
@@ -95,33 +91,6 @@ public class InGameController : MonoBehaviour
                 playerInput.actions = GameManager.Instance.playerInputAsset[i];
             }
         }
-
-        ////
-        //Vector3 player1StartPosition = new Vector3(0f, -4.2f, 0);
-        //Vector3 player2StartPosition = new Vector3(1.4f, -4.2f, 0);
-        ////
-        //
-        //if (GameManager.Instance.player1Prefab != null)
-        //{
-        //    player1 = Instantiate(GameManager.Instance.player1Prefab, player1StartPosition, Quaternion.identity);
-        //    alivePlayers = 1;
-
-        //    PlayerInput player1Input = player1.GetComponent<PlayerInput>();
-        //    player1Input.actions = GameManager.Instance.player1InputAsset;
-        //}
-
-        //if (GameManager.Instance.CurrentGameMode == GameMode.MultiPlayer)
-        //{
-        //    if (GameManager.Instance.player2Prefab != null)
-        //    {
-        //        player2 = Instantiate(GameManager.Instance.player2Prefab, player2StartPosition, Quaternion.identity);
-        //        alivePlayers++;
-
-        //        PlayerInput player2Input = player2.GetComponent<PlayerInput>();
-        //        player2Input.actions = GameManager.Instance.player2InputAsset;
-        //    }
-        //}
-        //
     }
 
 
