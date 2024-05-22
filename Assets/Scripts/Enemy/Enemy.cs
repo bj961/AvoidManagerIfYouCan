@@ -41,6 +41,11 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnGameOver -= DestroyObjectOnGameOver;
+    }
+
     void DestroyObjectOnGameOver()
     {
         Destroy(gameObject);

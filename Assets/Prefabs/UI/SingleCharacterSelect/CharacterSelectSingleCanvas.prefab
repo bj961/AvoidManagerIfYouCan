@@ -212,6 +212,7 @@ GameObject:
   - component: {fileID: 7038620230326569080}
   - component: {fileID: 3433242824068802772}
   - component: {fileID: 2046827557998914733}
+  - component: {fileID: 2701347321264287077}
   m_Layer: 5
   m_Name: StartButton
   m_TagString: Untagged
@@ -320,7 +321,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3433242824068802772}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2701347321264287077}
+        m_TargetAssemblyTypeName: UIButton, Assembly-CSharp
+        m_MethodName: CharacterSelectSubmitButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2701347321264287077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323551402439938028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2729d5fedcd808949be883f8ed06fce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1783562812279327956
 GameObject:
   m_ObjectHideFlags: 0
@@ -1017,7 +1042,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5124540175954132681
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1122,7 +1147,7 @@ MonoBehaviour:
   - {fileID: 3236517610667918178}
   - {fileID: 5691155726999349529}
   startGameButton: {fileID: 2046827557998914733}
-  maxSelectedButtons: 2
+  isMultiMode: 0
 --- !u!1 &5781166708035040806
 GameObject:
   m_ObjectHideFlags: 0

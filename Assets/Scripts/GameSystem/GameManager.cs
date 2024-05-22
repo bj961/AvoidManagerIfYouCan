@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
 
 
     public GameState CurrentGameState { get; private set; }
-    public GameMode CurrentGameMode { get; private set; }
+    public GameMode CurrentGameMode { get; set; }
 
     public void SetGameMode(GameMode newGameMode)
     {
@@ -74,9 +74,11 @@ public class GameManager : MonoBehaviour
     {
         inGameController = FindObjectOfType<InGameController>();
 
-        CurrentGameState = GameState.GameStart; // 테스트용 임시 코드
-
         // TODO : state를 이벤트 기반으로 변경한다면 이 코드도 수정할 것
+        if(CurrentGameState == GameState.Intro)
+        {
+            IntroState();
+        }
         if (CurrentGameState == GameState.GameStart)
         {
             GameStartState();
@@ -94,11 +96,11 @@ public class GameManager : MonoBehaviour
     {
         CurrentGameState = GameState.Intro;
 
-        InitSelectedCharacter();
-        StageManager.Instance.SetDifficulty(0);
+        // 테스트 위해 잠시 꺼둠
+        //InitSelectedCharacter();
+        //StageManager.Instance.SetDifficulty(0);
 
-        // TODO : 시작화면 UI 열기
-        //UIManager.Instance.SelectPopup("introUI");
+        UIManager.Instance.SelectPopup("introUI");
 
         SoundManager.Instance.PlayBGM(SoundManager.Instance.introBGM);
     }
@@ -113,37 +115,43 @@ public class GameManager : MonoBehaviour
     // State : 캐릭터 선택
     public void SelectCharacterState()
     {
+        Debug.Log("#### CharacterSelect ####");
+
         CurrentGameState = GameState.SelectCharacter;
 
-        // TODO : 캐릭터 선택 UI 열기
-        //UIManager.Instance.SelectPopup("selectUI");
-
-        // TODO : 캐릭터 선택
-        // player1Prefab, player2Prefab 에 프리팹 할당토록
-        // 캐릭터 선택 완료되면 다음 state로
+        switch (CurrentGameMode)
+        {
+            case GameMode.SinglePlayer:
+                UIManager.Instance.SelectPopup("singleCharSelectUI");
+                break;
+            case GameMode.MultiPlayer:
+                UIManager.Instance.SelectPopup("multiCharSelectUI");
+                break;
+        } 
     }
 
 
     // State : 난이도 선택
-    // TODO : 난이도 선택 기능을 넣는다면 구현할 부분
     public void SelectDifficultyState()
     {
+        Debug.Log("#### Difficulty Select ####");
+
         CurrentGameState = GameState.SelectDifficulty;
 
         // TODO : 난이도 선택 UI 열기
         //UIManager.Instance.SelectPopup("selectDifficultyUI");
-
-        // TODO : 난이도 선택
     }
 
 
     // State : 게임 시작
     public void GameStartState()
     {
+        Debug.Log("#### GameStart ####");
+
         CurrentGameState = GameState.GameStart;
 
         // TODO : 시작창 UI
-        //UIManager.Instance.SelectPopup("playUI");
+        UIManager.Instance.SelectPopup("playUI");
 
         // 게임 시작
         inGameController.InGameStart();
@@ -152,14 +160,11 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void GameOver()
-    {
-        OnGameOver?.Invoke();
-    }
-
     // State : 게임 종료
     public void GameOverState()
     {
+        Debug.Log("#### GameOver ####");
+
         CurrentGameState = GameState.GameOver;
 
         SoundManager.Instance.PlaySoundOnce(SoundManager.Instance.gameOverSound);
@@ -167,7 +172,11 @@ public class GameManager : MonoBehaviour
         inGameController.GameOver();
 
         // TODO : 게임 종료 UI 열기
-        //UIManager.Instance.SelectPopup("gameOverUI");
+        UIManager.Instance.SelectPopup("gameOverUI");
+    }
+    public void GameOver()
+    {
+        OnGameOver?.Invoke();
     }
 
     public void ResetGame()

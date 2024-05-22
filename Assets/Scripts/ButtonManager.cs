@@ -8,17 +8,20 @@ public class ButtonManager : MonoBehaviour
     public Button startGameButton; 
     private List<Button> selectedButtons = new List<Button>();
     private int maxSelectedButtons = 2;
-    public bool isMultiMode;
+
+    GameObject selectedCharacterPrefab1;
+    GameObject selectedCharacterPrefab2;
 
     void Start()
     {
-        if (isMultiMode)
+        switch (GameManager.Instance.CurrentGameMode)
         {
-            maxSelectedButtons = 2;
-        }
-        else
-        {
-            maxSelectedButtons = 1;
+            case GameMode.SinglePlayer:
+                maxSelectedButtons = 1;
+                break;
+            case GameMode.MultiPlayer:
+                maxSelectedButtons = 2;
+                break;
         }
 
         foreach (Button button in buttons)
