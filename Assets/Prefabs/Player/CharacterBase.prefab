@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 6394316791777541757}
   - component: {fileID: 4338040753510220237}
   - component: {fileID: 2554999415436735397}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CharacterBase
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -271,7 +271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4837704999729737823}
   - component: {fileID: 5365551837127780869}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CharacterBaseSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

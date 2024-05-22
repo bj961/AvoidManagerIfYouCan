@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1589775503468427692}
   - component: {fileID: 1345567592091561139}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SprintEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 7450705497687089284}
   - component: {fileID: 4303903847528240036}
   - component: {fileID: 6171894888065896631}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Character1Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 5572978455662005677}
   - component: {fileID: 5577114233503935608}
   - component: {fileID: 9203393380824045720}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Character1
   m_TagString: Player
   m_Icon: {fileID: 0}
