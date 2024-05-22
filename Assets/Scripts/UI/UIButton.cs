@@ -60,13 +60,13 @@ public class UIButton : MonoBehaviour
     // RetryButton
     public void RetryButton()
     {
-        GameManager.Instance.ResetGame();
+        GameManager.Instance.RestartGame();
     }
 
     // 메인메뉴 버튼
     public void MainMenuButton()
     {
-        GameManager.Instance.RestartGame();
+        GameManager.Instance.ResetGame();
     }
 
     /** 게임 종료 화면 끝 **/

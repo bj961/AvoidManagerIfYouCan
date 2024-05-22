@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
 using System.Xml.Linq;
+using UnityEngine.InputSystem;
 
 
 public enum GameState
@@ -28,21 +29,22 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    public InGameController inGameController;
 
     public GameState CurrentGameState { get; private set; }
     public GameMode CurrentGameMode { get; set; }
 
+    
     public void SetGameMode(GameMode newGameMode)
     {
         CurrentGameMode = newGameMode;
     }
 
-
-    public InGameController inGameController;
-
-    // 캐릭터 프리팹
     public GameObject player1Prefab;
     public GameObject player2Prefab;
+
+    public GameObject player1Input;
+    public GameObject player2Input;
 
     public delegate void GameOverHandler();
     public event GameOverHandler OnGameOver;
@@ -54,8 +56,6 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             CurrentGameState = GameState.Intro;
-            CurrentGameMode = GameMode.SinglePlayer;
-            //CurrentGameMode = GameMode.MultiPlayer; //테스트용
 
             OnGameOver += GameOverState;
 
@@ -67,15 +67,22 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        InitializeGameManager();
     }
 
 
-    void Start()
+    // TODO : 게임 다시 시작 시 문제 발생하여
+    // Awake() Start() 위치 문제인지 확인 위해 임시로 만든 함수
+    // 나중에 없애고 위치 이동
+    void InitializeGameManager()
     {
         inGameController = FindObjectOfType<InGameController>();
 
+        Debug.Log("## GameMangaer Start() ##\n" + CurrentGameState.ToString());
+
         // TODO : state를 이벤트 기반으로 변경한다면 이 코드도 수정할 것
-        if(CurrentGameState == GameState.Intro)
+        if (CurrentGameState == GameState.Intro)
         {
             IntroState();
         }
@@ -88,6 +95,11 @@ public class GameManager : MonoBehaviour
             CurrentGameState = GameState.Intro;
             IntroState();
         }
+    }
+
+    void Start()
+    {
+        //InitializeGameManager();
     }
 
 
@@ -181,12 +193,14 @@ public class GameManager : MonoBehaviour
 
     public void ResetGame()
     {
+        Debug.Log("씬 다시 로드");
         string currentSceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentSceneName);
     }
 
     public void RestartGame()
     {
+        Debug.Log("게임 다시 시작");
         CurrentGameState = GameState.GameStart;
         ResetGame();
     }
