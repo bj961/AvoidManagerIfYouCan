@@ -46,15 +46,6 @@ public class UIManager : MonoBehaviour
         RegisterUIObjects();
     }
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-
-    }
 
     public void SelectPopup(string uiName)
     {
